@@ -37,6 +37,7 @@
     <ProjectReference Include="..\SFContacts.SessionKeys\SFContacts.SessionKeys.csproj" />
     <ProjectReference Include="..\SFContacts.UI\SFContacts.UI.csproj" />
     <ProjectReference Include="..\SFContacts.UserSession\SFContacts.UserSession.csproj" />
+    <ProjectReference Include="..\Web1\Microsoft.Extensions.Caching.ServiceFabric.Test.csproj" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.Common.targets" />
   <PropertyGroup>
