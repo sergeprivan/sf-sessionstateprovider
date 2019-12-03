@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace SFSessions1.Test
+namespace Microsoft.Extensions.Caching.ServiceFabric
 {
     public class Class1
     {
