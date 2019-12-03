@@ -20,7 +20,7 @@ namespace Microsoft.Extensions.Caching.ServiceFabric
             Absolute
         }
 
-        public DynamoDbCache(IOptions<DynamoDbCacheOptions> optionsAccessor)//, IAmazonDynamoDB dynamoDb)
+        public DynamoDbCache(IOptions<ServiceFabricCacheOptions> optionsAccessor)//, IAmazonDynamoDB dynamoDb)
         {
             //_client = dynamoDb;
 
