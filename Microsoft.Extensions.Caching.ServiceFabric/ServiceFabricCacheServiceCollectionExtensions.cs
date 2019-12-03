@@ -4,7 +4,7 @@ using Microsoft.Extensions.Caching.ServiceFabric;
 
 namespace Microsoft.Extensions.DependencyInjection
 {
-    public static class DynamoDbCacheServiceCollectionExtensions
+    public static class ServiceFabricCacheServiceCollectionExtensions
     {
         /// <summary>
         /// Adds Amazon DynamoDB caching services to the specified <see cref="IServiceCollection" />.
@@ -27,7 +27,7 @@ namespace Microsoft.Extensions.DependencyInjection
 
             services.AddOptions();
             services.Configure(setupAction);
-            services.Add(ServiceDescriptor.Singleton<IDistributedCache, DynamoDbCache>());
+            services.Add(ServiceDescriptor.Singleton<IDistributedCache, ServiceFabricCache>());
 
             return services;
         }

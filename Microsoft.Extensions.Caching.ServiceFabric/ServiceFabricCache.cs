@@ -6,7 +6,7 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.Extensions.Caching.ServiceFabric
 {
-    public class DynamoDbCache : IDistributedCache
+    public class ServiceFabricCache : IDistributedCache
     {
         //        private static IAmazonDynamoDB _client;
         //        private static Table _table;
@@ -20,7 +20,7 @@ namespace Microsoft.Extensions.Caching.ServiceFabric
             Absolute
         }
 
-        public DynamoDbCache(IOptions<ServiceFabricCacheOptions> optionsAccessor)//, IAmazonDynamoDB dynamoDb)
+        public ServiceFabricCache(IOptions<ServiceFabricCacheOptions> optionsAccessor)//, IAmazonDynamoDB dynamoDb)
         {
             //_client = dynamoDb;
 
