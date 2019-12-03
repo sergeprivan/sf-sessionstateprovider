@@ -34,6 +34,7 @@
     <Content Include="PublishProfiles\DevSF.5Node.xml" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Microsoft.Extensions.Caching.ServiceFabric.Test\Microsoft.Extensions.Caching.ServiceFabric.Test.csproj" />
     <ProjectReference Include="..\SFContacts.SessionKeys\SFContacts.SessionKeys.csproj" />
     <ProjectReference Include="..\SFContacts.UI\SFContacts.UI.csproj" />
     <ProjectReference Include="..\SFContacts.UserSession\SFContacts.UserSession.csproj" />

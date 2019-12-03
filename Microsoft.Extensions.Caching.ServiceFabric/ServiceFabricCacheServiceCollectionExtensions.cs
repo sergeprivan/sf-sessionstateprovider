@@ -13,7 +13,7 @@ namespace Microsoft.Extensions.DependencyInjection
         /// <param name="setupAction">An <see cref="Action{DynamoDbCacheOptions}"/> to configure the provided
         /// <see cref="ServiceFabricCacheOptions"/>.</param>
         /// <returns>The <see cref="IServiceCollection"/> so that additional calls can be chained.</returns>
-        public static IServiceCollection AddDistributedDynamoDbCache(this IServiceCollection services, Action<ServiceFabricCacheOptions> setupAction)
+        public static IServiceCollection AddDistributedServiceFabricCache(this IServiceCollection services, Action<ServiceFabricCacheOptions> setupAction)
         {
             if (services == null)
             {

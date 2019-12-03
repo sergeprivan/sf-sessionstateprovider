@@ -17,7 +17,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SFContacts.UserSession.Inte
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microsoft.Extensions.Caching.ServiceFabric", "Microsoft.Extensions.Caching.ServiceFabric\Microsoft.Extensions.Caching.ServiceFabric.csproj", "{71333294-730D-4F7E-B8C2-861879418008}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Microsoft.Extensions.Caching.ServiceFabric.Test", "Web1\Microsoft.Extensions.Caching.ServiceFabric.Test.csproj", "{7FC9A7AE-EAC9-4F77-A053-A6ACD0BA4702}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microsoft.Extensions.Caching.ServiceFabric.Test", "Microsoft.Extensions.Caching.ServiceFabric.Test\Microsoft.Extensions.Caching.ServiceFabric.Test.csproj", "{6741A8E9-6833-4367-8D7A-3F3EDEA6D2E3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -77,14 +77,14 @@ Global
 		{71333294-730D-4F7E-B8C2-861879418008}.Release|Any CPU.Build.0 = Release|Any CPU
 		{71333294-730D-4F7E-B8C2-861879418008}.Release|x64.ActiveCfg = Release|Any CPU
 		{71333294-730D-4F7E-B8C2-861879418008}.Release|x64.Build.0 = Release|Any CPU
-		{7FC9A7AE-EAC9-4F77-A053-A6ACD0BA4702}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7FC9A7AE-EAC9-4F77-A053-A6ACD0BA4702}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7FC9A7AE-EAC9-4F77-A053-A6ACD0BA4702}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{7FC9A7AE-EAC9-4F77-A053-A6ACD0BA4702}.Debug|x64.Build.0 = Debug|Any CPU
-		{7FC9A7AE-EAC9-4F77-A053-A6ACD0BA4702}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7FC9A7AE-EAC9-4F77-A053-A6ACD0BA4702}.Release|Any CPU.Build.0 = Release|Any CPU
-		{7FC9A7AE-EAC9-4F77-A053-A6ACD0BA4702}.Release|x64.ActiveCfg = Release|Any CPU
-		{7FC9A7AE-EAC9-4F77-A053-A6ACD0BA4702}.Release|x64.Build.0 = Release|Any CPU
+		{6741A8E9-6833-4367-8D7A-3F3EDEA6D2E3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6741A8E9-6833-4367-8D7A-3F3EDEA6D2E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6741A8E9-6833-4367-8D7A-3F3EDEA6D2E3}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{6741A8E9-6833-4367-8D7A-3F3EDEA6D2E3}.Debug|x64.Build.0 = Debug|Any CPU
+		{6741A8E9-6833-4367-8D7A-3F3EDEA6D2E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6741A8E9-6833-4367-8D7A-3F3EDEA6D2E3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6741A8E9-6833-4367-8D7A-3F3EDEA6D2E3}.Release|x64.ActiveCfg = Release|Any CPU
+		{6741A8E9-6833-4367-8D7A-3F3EDEA6D2E3}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

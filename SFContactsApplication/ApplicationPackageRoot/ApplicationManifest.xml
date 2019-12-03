@@ -3,7 +3,6 @@
   <Parameters>
     <Parameter Name="Web1_ASPNETCORE_ENVIRONMENT" DefaultValue="" />
     <Parameter Name="Web1_InstanceCount" DefaultValue="-1" />
-    <Parameter Name="test_InstanceCount" DefaultValue="-1" />
     <Parameter Name="SFContacts.SessionKeys_MinReplicaSetSize" DefaultValue="3" />
     <Parameter Name="SFContacts.SessionKeys_PartitionCount" DefaultValue="1" />
     <Parameter Name="SFContacts.SessionKeys_TargetReplicaSetSize" DefaultValue="3" />
@@ -21,10 +20,6 @@
     <EnvironmentOverrides CodePackageRef="code">
       <EnvironmentVariable Name="ASPNETCORE_ENVIRONMENT" Value="[Web1_ASPNETCORE_ENVIRONMENT]" />
     </EnvironmentOverrides>
-  </ServiceManifestImport>
-  <ServiceManifestImport>
-    <ServiceManifestRef ServiceManifestName="testPkg" ServiceManifestVersion="1.0.0" />
-    <ConfigOverrides />
   </ServiceManifestImport>
   <ServiceManifestImport>
     <ServiceManifestRef ServiceManifestName="SFContacts.UserSessionPkg" ServiceManifestVersion="1.0.0" />
@@ -45,11 +40,6 @@
          The attribute ServiceTypeName below must match the name defined in the imported ServiceManifest.xml file. -->
     <Service Name="Web1" ServicePackageActivationMode="ExclusiveProcess">
       <StatelessService ServiceTypeName="Web1Type" InstanceCount="[Web1_InstanceCount]">
-        <SingletonPartition />
-      </StatelessService>
-    </Service>
-    <Service Name="test" ServicePackageActivationMode="ExclusiveProcess">
-      <StatelessService ServiceTypeName="testType" InstanceCount="[test_InstanceCount]">
         <SingletonPartition />
       </StatelessService>
     </Service>

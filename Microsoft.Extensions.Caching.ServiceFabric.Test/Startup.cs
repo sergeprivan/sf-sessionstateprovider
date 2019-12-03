@@ -23,6 +23,7 @@ namespace Web1
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+            services.AddDistributedServiceFabricCache(o => { o.TableName = "LabSessionState"; });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

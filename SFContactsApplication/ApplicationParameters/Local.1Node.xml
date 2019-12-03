@@ -3,7 +3,6 @@
   <Parameters>
     <Parameter Name="Web1_ASPNETCORE_ENVIRONMENT" Value="Development" />
     <Parameter Name="Web1_InstanceCount" Value="1" />
-    <Parameter Name="test_InstanceCount" Value="1" />
     <Parameter Name="SFContacts.SessionKeys_PartitionCount" Value="1" />
     <Parameter Name="SFContacts.SessionKeys_MinReplicaSetSize" Value="1" />
     <Parameter Name="SFContacts.SessionKeys_TargetReplicaSetSize" Value="1" />
