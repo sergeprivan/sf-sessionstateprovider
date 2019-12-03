@@ -1,6 +1,6 @@
 ﻿using System;
 using Microsoft.Extensions.Caching.Distributed;
-using Microsoft.Extensions.Caching.DynamoDb;
+using Microsoft.Extensions.Caching.ServiceFabric;
 
 namespace Microsoft.Extensions.DependencyInjection
 {
