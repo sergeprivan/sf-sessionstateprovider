@@ -1,8 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
-    <AssemblyName>Microsoft.Extensions.Caching.ServiceFabric</AssemblyName>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
@@ -13,7 +12,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\SFContacts.UserSession.Interfaces\SFContacts.UserSession.Interfaces.csproj" />
+    <ProjectReference Include="..\Microsoft.Extensions.Caching.ServiceFabric.UserSession.Interfaces\Microsoft.Extensions.Caching.ServiceFabric.UserSession.Interfaces.csproj" />
+    <PackageReference Include="Microsoft.ServiceFabric.Actors" Version="4.0.457" />
+
   </ItemGroup>
 
 </Project>
+
+

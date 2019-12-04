@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.ServiceFabric.Actors;
 using Microsoft.ServiceFabric.Actors.Client;
-using SFContacts.UserSession.Interfaces;
+using Microsoft.Extensions.Caching.ServiceFabric.UserSession.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
