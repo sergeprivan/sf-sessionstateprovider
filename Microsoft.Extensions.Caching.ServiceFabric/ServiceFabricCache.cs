@@ -22,6 +22,7 @@ namespace Microsoft.Extensions.Caching.ServiceFabric
 
         public ServiceFabricCache(IOptions<ServiceFabricCacheOptions> optionsAccessor)//, IAmazonDynamoDB dynamoDb)
         {
+            int i = 10;
             //_client = dynamoDb;
 
             //if (optionsAccessor != null)
@@ -44,11 +45,13 @@ namespace Microsoft.Extensions.Caching.ServiceFabric
 
         public byte[] Get(string key)
         {
+            int i = 10;
             return GetAsync(key).Result;
         }
 
         public async Task<byte[]> GetAsync(string key, CancellationToken token = default(CancellationToken))
         {
+            int i = 10;
             //var value = await _table.GetItemAsync(key);
             //if (value == null || value["Session"] == null)
             //{
@@ -61,11 +64,13 @@ namespace Microsoft.Extensions.Caching.ServiceFabric
 
         public void Refresh(string key)
         {
+            int i = 10;
             RefreshAsync(key).Wait();
         }
 
         public async Task RefreshAsync(string key, CancellationToken token = default(CancellationToken))
         {
+            int i = 10;
             //var value = _table.GetItemAsync(key).Result;
             //if (value == null || value["ExpiryType"] == null || value["ExpiryType"] != "Sliding")
             //{
@@ -78,21 +83,26 @@ namespace Microsoft.Extensions.Caching.ServiceFabric
 
         public void Remove(string key)
         {
+            int i = 10;
             //_table.DeleteItemAsync(key).Wait();
         }
 
         public async Task RemoveAsync(string key, CancellationToken token = default(CancellationToken))
         {
+            int i = 10;
             //await _table.DeleteItemAsync(key);
         }
 
         public void Set(string key, byte[] value, DistributedCacheEntryOptions options)
         {
+            int i = 10;
             SetAsync(key, value, options).Wait();
         }
 
         public async Task SetAsync(string key, byte[] value, DistributedCacheEntryOptions options, CancellationToken token = default(CancellationToken))
         {
+            int i = 10;
+
             //ExpiryType expiryType;
             //var epoctime = GetEpochExpiry(options, out expiryType);
             //var _ssdoc = new Document();
@@ -108,6 +118,8 @@ namespace Microsoft.Extensions.Caching.ServiceFabric
 
         private long GetEpochExpiry(DistributedCacheEntryOptions options, out ExpiryType expiryType)
         {
+            int i = 10;
+
             if (options.SlidingExpiration.HasValue)
             {
                 expiryType = ExpiryType.Sliding;

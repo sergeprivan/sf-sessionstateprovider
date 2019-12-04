@@ -6,20 +6,33 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Caching.ServiceFabric.Test.Models;
+using Microsoft.Extensions.Caching.Distributed;
+using Microsoft.Extensions.Options;
+using Microsoft.AspNetCore.Http;
+using System.Text;
 
 namespace Microsoft.Extensions.Caching.ServiceFabric.Test.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        //private readonly ILogger<HomeController> _logger;
+        private readonly IDistributedCache _distributedCache;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(IDistributedCache distributedCache)
         {
-            _logger = logger;
+            //  _logger = logger;
+            _distributedCache = distributedCache;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
+            if (string.IsNullOrEmpty(HttpContext.Session.GetString("TestSession")))
+            {
+                HttpContext.Session.SetString("TestSession", Guid.NewGuid().ToString());
+            }
+
+            ViewData["TestSession"] = HttpContext.Session.GetString("TestSession");
+
             return View();
         }
 
