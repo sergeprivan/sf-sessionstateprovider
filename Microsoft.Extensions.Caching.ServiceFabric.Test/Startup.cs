@@ -39,7 +39,7 @@ namespace Microsoft.Extensions.Caching.ServiceFabric.Test
             }
             app.UseStaticFiles();
 
-            app.UseSession();
+            //app.UseSession();
 
             app.UseRouting();
 
