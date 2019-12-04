@@ -1,11 +1,10 @@
+using Microsoft.ServiceFabric.Services.Runtime;
 using System;
 using System.Diagnostics;
-using System.Fabric;
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.ServiceFabric.Services.Runtime;
 
-namespace test
+namespace Web1
 {
     internal static class Program
     {
@@ -21,12 +20,12 @@ namespace test
                 // When Service Fabric creates an instance of this service type,
                 // an instance of the class is created in this host process.
 
-                ServiceRuntime.RegisterServiceAsync("testType",
-                    context => new test(context)).GetAwaiter().GetResult();
+                ServiceRuntime.RegisterServiceAsync("Web1Type",
+                    context => new Web1(context)).GetAwaiter().GetResult();
 
-                ServiceEventSource.Current.ServiceTypeRegistered(Process.GetCurrentProcess().Id, typeof(test).Name);
+                ServiceEventSource.Current.ServiceTypeRegistered(Process.GetCurrentProcess().Id, typeof(Web1).Name);
 
-                // Prevents this host process from terminating so services keep running.
+                // Prevents this host process from terminating so services keeps running. 
                 Thread.Sleep(Timeout.Infinite);
             }
             catch (Exception e)

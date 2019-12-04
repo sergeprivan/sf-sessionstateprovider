@@ -3,13 +3,6 @@
   <Parameters>
     <Parameter Name="Web1_ASPNETCORE_ENVIRONMENT" DefaultValue="" />
     <Parameter Name="Web1_InstanceCount" DefaultValue="-1" />
-    <Parameter Name="SFContacts.SessionKeys_MinReplicaSetSize" DefaultValue="3" />
-    <Parameter Name="SFContacts.SessionKeys_PartitionCount" DefaultValue="1" />
-    <Parameter Name="SFContacts.SessionKeys_TargetReplicaSetSize" DefaultValue="3" />
-    <Parameter Name="SFContacts.UI_InstanceCount" DefaultValue="-1" />
-    <Parameter Name="UserSessionActorService_PartitionCount" DefaultValue="10" />
-    <Parameter Name="UserSessionActorService_MinReplicaSetSize" DefaultValue="3" />
-    <Parameter Name="UserSessionActorService_TargetReplicaSetSize" DefaultValue="3" />
   </Parameters>
   <!-- Import the ServiceManifest from the ServicePackage. The ServiceManifestName and ServiceManifestVersion 
        should match the Name and Version attributes of the ServiceManifest element defined in the 
@@ -21,17 +14,6 @@
       <EnvironmentVariable Name="ASPNETCORE_ENVIRONMENT" Value="[Web1_ASPNETCORE_ENVIRONMENT]" />
     </EnvironmentOverrides>
   </ServiceManifestImport>
-  <ServiceManifestImport>
-    <ServiceManifestRef ServiceManifestName="SFContacts.UserSessionPkg" ServiceManifestVersion="1.0.0" />
-  </ServiceManifestImport>
-  <ServiceManifestImport>
-    <ServiceManifestRef ServiceManifestName="SFContacts.SessionKeysPkg" ServiceManifestVersion="1.0.0" />
-    <ConfigOverrides />
-  </ServiceManifestImport>
-  <ServiceManifestImport>
-    <ServiceManifestRef ServiceManifestName="SFContacts.UIPkg" ServiceManifestVersion="1.0.0" />
-    <ConfigOverrides />
-  </ServiceManifestImport>
   <DefaultServices>
     <!-- The section below creates instances of service types, when an instance of this 
          application type is created. You can also create one or more instances of service type using the 
@@ -42,21 +24,6 @@
       <StatelessService ServiceTypeName="Web1Type" InstanceCount="[Web1_InstanceCount]">
         <SingletonPartition />
       </StatelessService>
-    </Service>
-    <Service Name="SFContacts.SessionKeys">
-      <StatefulService ServiceTypeName="SFContacts.SessionKeysType" TargetReplicaSetSize="[SFContacts.SessionKeys_TargetReplicaSetSize]" MinReplicaSetSize="[SFContacts.SessionKeys_MinReplicaSetSize]">
-        <UniformInt64Partition PartitionCount="[SFContacts.SessionKeys_PartitionCount]" LowKey="-9223372036854775808" HighKey="9223372036854775807" />
-      </StatefulService>
-    </Service>
-    <Service Name="SFContacts.UI" ServicePackageActivationMode="ExclusiveProcess">
-      <StatelessService ServiceTypeName="SFContacts.UIType" InstanceCount="[SFContacts.UI_InstanceCount]">
-        <SingletonPartition />
-      </StatelessService>
-    </Service>
-    <Service Name="UserSessionActorService" GeneratedIdRef="9ea82191-785a-43fa-a3f2-ea1ce941f8c1|Persisted">
-      <StatefulService ServiceTypeName="UserSessionActorServiceType" TargetReplicaSetSize="[UserSessionActorService_TargetReplicaSetSize]" MinReplicaSetSize="[UserSessionActorService_MinReplicaSetSize]">
-        <UniformInt64Partition PartitionCount="[UserSessionActorService_PartitionCount]" LowKey="-9223372036854775808" HighKey="9223372036854775807" />
-      </StatefulService>
     </Service>
   </DefaultServices>
 </ApplicationManifest>
