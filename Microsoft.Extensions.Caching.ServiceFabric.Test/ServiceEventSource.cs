@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.ServiceFabric.Services.Runtime;
 
-namespace Web1
+namespace Microsoft.Extensions.Caching.ServiceFabric.Test
 {
     [EventSource(Name = "MyCompany-SFContactsApplication-Web1")]
     internal sealed class ServiceEventSource : EventSource

@@ -4,7 +4,7 @@ using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Web1
+namespace Microsoft.Extensions.Caching.ServiceFabric.Test
 {
     internal static class Program
     {
@@ -20,10 +20,10 @@ namespace Web1
                 // When Service Fabric creates an instance of this service type,
                 // an instance of the class is created in this host process.
 
-                ServiceRuntime.RegisterServiceAsync("Web1Type",
-                    context => new Web1(context)).GetAwaiter().GetResult();
+                ServiceRuntime.RegisterServiceAsync("Microsoft.Extensions.Caching.ServiceFabric.TestType",
+                    context => new WebApp(context)).GetAwaiter().GetResult();
 
-                ServiceEventSource.Current.ServiceTypeRegistered(Process.GetCurrentProcess().Id, typeof(Web1).Name);
+                ServiceEventSource.Current.ServiceTypeRegistered(Process.GetCurrentProcess().Id, typeof(WebApp).Name);
 
                 // Prevents this host process from terminating so services keeps running. 
                 Thread.Sleep(Timeout.Infinite);

@@ -5,9 +5,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using Web1.Models;
+using Microsoft.Extensions.Caching.ServiceFabric.Test.Models;
 
-namespace Web1.Controllers
+namespace Microsoft.Extensions.Caching.ServiceFabric.Test.Controllers
 {
     public class HomeController : Controller
     {

@@ -8,7 +8,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
-namespace Web1
+namespace Microsoft.Extensions.Caching.ServiceFabric.Test
 {
     public class Startup
     {

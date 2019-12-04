@@ -12,14 +12,14 @@ using Microsoft.ServiceFabric.Services.Communication.Runtime;
 using Microsoft.ServiceFabric.Services.Runtime;
 using Microsoft.ServiceFabric.Data;
 
-namespace Web1
+namespace Microsoft.Extensions.Caching.ServiceFabric.Test
 {
     /// <summary>
     /// The FabricRuntime creates an instance of this class for each service type instance. 
     /// </summary>
-    internal sealed class Web1 : StatelessService
+    internal sealed class WebApp : StatelessService
     {
-        public Web1(StatelessServiceContext context)
+        public WebApp(StatelessServiceContext context)
             : base(context)
         { }
 

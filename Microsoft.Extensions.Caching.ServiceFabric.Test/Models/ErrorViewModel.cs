@@ -1,6 +1,6 @@
 using System;
 
-namespace Web1.Models
+namespace Microsoft.Extensions.Caching.ServiceFabric.Test.Models
 {
     public class ErrorViewModel
     {
