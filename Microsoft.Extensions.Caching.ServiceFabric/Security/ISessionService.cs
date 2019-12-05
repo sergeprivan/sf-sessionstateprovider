@@ -7,7 +7,7 @@ namespace Microsoft.Extensions.Caching.ServiceFabric
 {
     public interface ISessionService
     {
-        Task AddSessionItem<T>(string userSessionId, string key, T value);
-        Task<T> GetSessionItem<T>(string userSessionId, string key);
+        Task AddSessionItem(string userSessionId, string key, byte[] value);
+        Task<byte[]> GetSessionItem(string userSessionId, string key);
     }
 }

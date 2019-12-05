@@ -9,38 +9,49 @@ using System.Security.Claims;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Microsoft.Extensions.Caching.ServiceFabric.Security {
-    public class SessionService: ISessionService {
-        public SessionService() {
+namespace Microsoft.Extensions.Caching.ServiceFabric.Security
+{
+    public class SessionService : ISessionService
+    {
+        public SessionService()
+        {
             UserSessionUriBuilder = new ServiceUriBuilder("UserSessionActorService");
         }
 
-        public async Task AddSessionItem<T>(string userSessionId, string key, T value) {
-            try {
+        public async Task AddSessionItem(string userSessionId, string key, byte[] value)
+        {
+            try
+            {
                 var sessionActor = GetSessionActor(userSessionId);
-                await sessionActor?.SetSessionItem(key, value.ToString(), CancellationToken.None);
+                await sessionActor?.SetSessionItem(key, value, CancellationToken.None);
             }
-            catch (Exception ex) {
+            catch (Exception ex)
+            {
                 ServiceEventSource.Current.Message($"Method {nameof(SessionService)}->AddSessionItem<T>() failed with error: {ex.ToString()} at: {DateTime.UtcNow}");
             }
         }
 
-        public async Task<T> GetSessionItem<T>(string userSessionId, string key) {
-            try {
+        public async Task<byte[]> GetSessionItem(string userSessionId, string key)
+        {
+            try
+            {
                 var sessionActor = GetSessionActor(userSessionId);
                 var sessionItemValue = await sessionActor?.GetSessionItem(key, CancellationToken.None);
-                if (string.IsNullOrEmpty(sessionItemValue)) {
-                    return default(T);
+                if (sessionItemValue == null)
+                {
+                    return null;
                 }
-                return (T)Convert.ChangeType(sessionItemValue, typeof(T));
+                return sessionItemValue;
             }
-            catch (Exception ex) {
+            catch (Exception ex)
+            {
                 ServiceEventSource.Current.Message($"Method {nameof(SessionService)}->GetSessionItem<T>() failed with error: {ex.ToString()} at: {DateTime.UtcNow}");
             }
-            return default(T);
+            return null;
         }
 
-        public IUserSession GetSessionActor(string userSessionId) {
+        public IUserSession GetSessionActor(string userSessionId)
+        {
 
             if (string.IsNullOrEmpty(userSessionId))
             {

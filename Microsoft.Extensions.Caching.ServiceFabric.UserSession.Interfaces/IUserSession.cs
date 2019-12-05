@@ -13,8 +13,8 @@ namespace Microsoft.Extensions.Caching.ServiceFabric.UserSession.Interfaces
     /// </summary>
     public interface IUserSession : IActor
     {
-        Task<string> GetSessionItem(string key, CancellationToken cancellationToken);
-        Task SetSessionItem(string key, string value, CancellationToken cancellationToken);
+        Task<byte[]> GetSessionItem(string key, CancellationToken cancellationToken);
+        Task SetSessionItem(string key, byte[] value, CancellationToken cancellationToken);
         Task RemoveSessionItem(string key, CancellationToken cancellationToken);
     }
 }

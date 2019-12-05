@@ -31,18 +31,19 @@ namespace Microsoft.Extensions.Caching.ServiceFabric.UserSession
         {
         }
 
-        public async Task<string> GetSessionItem(string key, CancellationToken cancellationToken)
+        public async Task<byte[]> GetSessionItem(string key, CancellationToken cancellationToken)
         {
-            var stateValue = await StateManager.TryGetStateAsync<string>(key, cancellationToken);
+            var stateValue = await StateManager.TryGetStateAsync<byte[]>(key, cancellationToken);
             return stateValue.HasValue ? stateValue.Value : null;
         }
+
 
         public async Task RemoveSessionItem(string key, CancellationToken cancellationToken)
         {
             await StateManager.TryRemoveStateAsync(key, cancellationToken);
         }
 
-        public Task SetSessionItem(string key, string value, CancellationToken cancellationToken)
+        public Task SetSessionItem(string key, byte[] value, CancellationToken cancellationToken)
         {
             return StateManager.AddOrUpdateStateAsync(key, value, (k, v) => value, cancellationToken);
         }

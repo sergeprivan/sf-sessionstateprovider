@@ -19,44 +19,20 @@ namespace Microsoft.Extensions.Caching.ServiceFabric
         }
         ISessionService SessionService { get; }
 
-        public ServiceFabricCache(IOptions<ServiceFabricCacheOptions> optionsAccessor, ISessionService sessionService)//, IAmazonDynamoDB dynamoDb)
+        public ServiceFabricCache(IOptions<ServiceFabricCacheOptions> optionsAccessor)
         {
-            SessionService = sessionService ?? throw new ArgumentNullException(nameof(sessionService));
-
-            //_client = dynamoDb;
-
-            //if (optionsAccessor != null)
-            //{
-            //    _tableName = optionsAccessor.Value.TableName;
-            //    _ttlfield = optionsAccessor.Value.TtlAttribute;
-            //    _sessionMinutes = (int)optionsAccessor.Value.IdleTimeout.TotalMinutes;
-            //}
-
-            //if (_client == null)
-            //{
-            //    _client = new AmazonDynamoDBClient();
-            //}
-
-            //if (_table == null)
-            //{
-            //    _table = Table.LoadTable(_client, _tableName);
-            //}
+            SessionService = optionsAccessor.Value.SessionService ?? throw new ArgumentNullException(nameof(optionsAccessor.Value.SessionService));
         }
 
         public byte[] Get(string key)
         {
-            return GetAsync(key).Result;
+            var result = GetAsync(key).Result;
+            return result;
         }
 
         public async Task<byte[]> GetAsync(string key, CancellationToken token = default(CancellationToken))
         {
-            var item = SessionService.GetSessionItem<string>(key, key).Result;
-            byte[] result = null;
-            if (item != null)
-            {
-                return await Task.Run(() => Encoding.UTF8.GetBytes(item));
-            }
-
+            var result = await SessionService.GetSessionItem(key, key);
             return result;
         }
 
@@ -67,7 +43,6 @@ namespace Microsoft.Extensions.Caching.ServiceFabric
 
         public async Task RefreshAsync(string key, CancellationToken token = default(CancellationToken))
         {
-            int i = 10;
             //var value = _table.GetItemAsync(key).Result;
             //if (value == null || value["ExpiryType"] == null || value["ExpiryType"] != "Sliding")
             //{
@@ -75,7 +50,8 @@ namespace Microsoft.Extensions.Caching.ServiceFabric
             //}
             //value[_ttlfield] = DateTimeOffset.Now.ToUniversalTime().ToUnixTimeSeconds() + (_sessionMinutes * 60);
 
-            //await SetAsync(key, value["Session"].AsByteArray(), new DistributedCacheEntryOptions { SlidingExpiration = new TimeSpan(0, _sessionMinutes, 0) });
+
+            await SetAsync(key, Get(key), new DistributedCacheEntryOptions { SlidingExpiration = new TimeSpan(0, _sessionMinutes, 0) });
         }
 
         public void Remove(string key)
@@ -97,8 +73,7 @@ namespace Microsoft.Extensions.Caching.ServiceFabric
 
         public async Task SetAsync(string key, byte[] value, DistributedCacheEntryOptions options, CancellationToken token = default(CancellationToken))
         {
-            await SessionService.AddSessionItem(key, key, Encoding.UTF8.GetString(value, 0, value.Length));
-
+            await SessionService.AddSessionItem(key, key, value);
             //ExpiryType expiryType;
             //var epoctime = GetEpochExpiry(options, out expiryType);
             //var _ssdoc = new Document();

@@ -24,14 +24,17 @@ namespace Microsoft.Extensions.Caching.ServiceFabric.Test.Controllers
             _distributedCache = distributedCache;
         }
 
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
-            if (string.IsNullOrEmpty(HttpContext.Session.GetString("TestSession")))
+            var sessionValue = "TestSession";
+            var checkValue = HttpContext.Session.GetString(sessionValue);
+
+            if (string.IsNullOrEmpty(checkValue))
             {
-                HttpContext.Session.SetString("TestSession", Guid.NewGuid().ToString());
+                HttpContext.Session.SetString(sessionValue, sessionValue + Guid.NewGuid().ToString());
             }
 
-            ViewData["TestSession"] = HttpContext.Session.GetString("TestSession");
+            ViewData[sessionValue] = HttpContext.Session.GetString(sessionValue);
 
             return View();
         }
