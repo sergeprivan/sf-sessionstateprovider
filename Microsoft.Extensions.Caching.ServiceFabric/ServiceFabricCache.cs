@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Caching.Distributed;
@@ -8,9 +9,6 @@ namespace Microsoft.Extensions.Caching.ServiceFabric
 {
     public class ServiceFabricCache : IDistributedCache
     {
-        //        private static IAmazonDynamoDB _client;
-        //        private static Table _table;
-
         private string _tableName = "ASP.NET_SessionState";
         private string _ttlfield = "TTL";
         private int _sessionMinutes = 20;
@@ -19,10 +17,12 @@ namespace Microsoft.Extensions.Caching.ServiceFabric
             Sliding,
             Absolute
         }
+        ISessionService SessionService { get; }
 
-        public ServiceFabricCache(IOptions<ServiceFabricCacheOptions> optionsAccessor)//, IAmazonDynamoDB dynamoDb)
+        public ServiceFabricCache(IOptions<ServiceFabricCacheOptions> optionsAccessor, ISessionService sessionService)//, IAmazonDynamoDB dynamoDb)
         {
-            int i = 10;
+            SessionService = sessionService ?? throw new ArgumentNullException(nameof(sessionService));
+
             //_client = dynamoDb;
 
             //if (optionsAccessor != null)
@@ -45,26 +45,23 @@ namespace Microsoft.Extensions.Caching.ServiceFabric
 
         public byte[] Get(string key)
         {
-            int i = 10;
             return GetAsync(key).Result;
         }
 
         public async Task<byte[]> GetAsync(string key, CancellationToken token = default(CancellationToken))
         {
-            int i = 10;
-            //var value = await _table.GetItemAsync(key);
-            //if (value == null || value["Session"] == null)
-            //{
-            //    return null;
-            //}
+            var item = SessionService.GetSessionItem<string>(key, key).Result;
+            byte[] result = null;
+            if (item != null)
+            {
+                return await Task.Run(() => Encoding.UTF8.GetBytes(item));
+            }
 
-            //return value["Session"].AsByteArray();
-            return null;
+            return result;
         }
 
         public void Refresh(string key)
         {
-            int i = 10;
             RefreshAsync(key).Wait();
         }
 
@@ -95,13 +92,12 @@ namespace Microsoft.Extensions.Caching.ServiceFabric
 
         public void Set(string key, byte[] value, DistributedCacheEntryOptions options)
         {
-            int i = 10;
             SetAsync(key, value, options).Wait();
         }
 
         public async Task SetAsync(string key, byte[] value, DistributedCacheEntryOptions options, CancellationToken token = default(CancellationToken))
         {
-            int i = 10;
+            await SessionService.AddSessionItem(key, key, Encoding.UTF8.GetString(value, 0, value.Length));
 
             //ExpiryType expiryType;
             //var epoctime = GetEpochExpiry(options, out expiryType);

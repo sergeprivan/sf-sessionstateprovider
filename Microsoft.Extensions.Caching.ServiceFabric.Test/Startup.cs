@@ -4,6 +4,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Session;
+using Microsoft.Extensions.Caching.ServiceFabric.Security;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -24,7 +27,7 @@ namespace Microsoft.Extensions.Caching.ServiceFabric.Test
         {
             services.AddMvc();
             services.AddControllersWithViews();
-            services.AddDistributedServiceFabricCache(o => { o.TableName = "LabSessionState"; });
+            services.AddDistributedServiceFabricCache(o => { o.TableName = "LabSessionState"; o.SessionService = new SessionService(); });
             services.AddSession(options =>
             {
                 options.Cookie.Name = ".AdventureWorks.Session";
