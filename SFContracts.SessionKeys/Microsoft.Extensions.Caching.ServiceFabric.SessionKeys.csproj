@@ -7,9 +7,10 @@
     <ServerGarbageCollection>True</ServerGarbageCollection>
     <RuntimeIdentifier>win7-x64</RuntimeIdentifier>
     <TargetLatestRuntimePatch>False</TargetLatestRuntimePatch>
-    <AssemblyName>SFContacts.SessionKeys</AssemblyName>
+    <AssemblyName>Microsoft.Extensions.Caching.ServiceFabric.SessionKeys</AssemblyName>
     <ApplicationIcon />
     <StartupObject />
+    <RootNamespace>Microsoft.Extensions.Caching.ServiceFabric.SessionKeys</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
@@ -17,7 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\SFContacts.SessionKeys.Domain\SFContacts.SessionKeys.Domain.csproj" />
+    <ProjectReference Include="..\SFContacts.SessionKeys.Domain\Microsoft.Extensions.Caching.ServiceFabric.SessionKeys.Domain.csproj" />
   </ItemGroup>
 
 </Project>

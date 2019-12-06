@@ -1,21 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Fabric;
-using System;
-using System.Collections.Generic;
-using System.Fabric;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.ServiceFabric.Data.Collections;
 using Microsoft.ServiceFabric.Services.Communication.Runtime;
 using Microsoft.ServiceFabric.Services.Runtime;
 using Microsoft.ServiceFabric.Services.Remoting.Runtime;
-using Microsoft.ServiceFabric.Services.Remoting;
 using Microsoft.ServiceFabric.Data;
-using SFContacts.SessionKeys.Domain;
+using Microsoft.Extensions.Caching.ServiceFabric.SessionKeys.Domain;
 
-namespace SFContacts.SessionKeys
+namespace Microsoft.Extensions.Caching.ServiceFabric.SessionKeys
 {
     /// <summary>
     /// An instance of this class is created for each service replica by the Service Fabric runtime.

@@ -7,8 +7,8 @@
     <ProjectGuid>{8780067B-6144-4373-BC79-7675EC3F707D}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>SFContacts.SessionKeys.Domain</RootNamespace>
-    <AssemblyName>SFContacts.SessionKeys.Domain</AssemblyName>
+    <RootNamespace>Microsoft.Extensions.Caching.ServiceFabric.SessionKeys.Domain</RootNamespace>
+    <AssemblyName>Microsoft.Extensions.Caching.ServiceFabric.SessionKeys.Domain</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>

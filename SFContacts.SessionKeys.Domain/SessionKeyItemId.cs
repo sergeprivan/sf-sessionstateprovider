@@ -5,7 +5,7 @@ using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SFContacts.SessionKeys.Domain {
+namespace Microsoft.Extensions.Caching.ServiceFabric.SessionKeys.Domain {
     [DataContract]
     public class SessionKeyItemId : IFormattable, IComparable, IComparable<SessionKeyItemId>, IEquatable<SessionKeyItemId> {
 

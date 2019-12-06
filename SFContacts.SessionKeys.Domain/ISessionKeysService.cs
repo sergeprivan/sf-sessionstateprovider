@@ -6,7 +6,8 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace SFContacts.SessionKeys.Domain {
+namespace Microsoft.Extensions.Caching.ServiceFabric.SessionKeys.Domain
+{
     public interface ISessionKeysService : IService {
         Task<long> GetKeyCountAsync(CancellationToken cancellationToken);
         Task AddKey(SessionKeyItem keyItem);

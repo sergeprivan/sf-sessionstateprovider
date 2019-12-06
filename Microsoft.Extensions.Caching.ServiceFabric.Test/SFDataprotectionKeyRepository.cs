@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.DataProtection.Repositories;
+using Microsoft.Extensions.Caching.ServiceFabric.SessionKeys.Domain;
 using Microsoft.Extensions.Caching.ServiceFabric.Test;
 using Microsoft.ServiceFabric.Services.Client;
 using Microsoft.ServiceFabric.Services.Remoting.Client;
-using SFContacts.SessionKeys.Domain;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;

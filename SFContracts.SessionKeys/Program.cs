@@ -4,7 +4,8 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.ServiceFabric.Services.Runtime;
 
-namespace SFContacts.SessionKeys {
+namespace Microsoft.Extensions.Caching.ServiceFabric.SessionKeys
+{
     internal static class Program {
         /// <summary>
         /// This is the entry point of the service host process.
@@ -16,7 +17,7 @@ namespace SFContacts.SessionKeys {
                 // When Service Fabric creates an instance of this service type,
                 // an instance of the class is created in this host process.
 
-                ServiceRuntime.RegisterServiceAsync("SFContacts.SessionKeysType",
+                ServiceRuntime.RegisterServiceAsync("Microsoft.Extensions.Caching.ServiceFabric.SessionKeysType",
                     context => new SessionKeys(context)).GetAwaiter().GetResult();
 
                 ServiceEventSource.Current.ServiceTypeRegistered(Process.GetCurrentProcess().Id, typeof(SessionKeys).Name);

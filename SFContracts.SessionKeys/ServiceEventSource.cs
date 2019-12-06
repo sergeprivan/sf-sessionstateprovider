@@ -7,7 +7,8 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.ServiceFabric.Services.Runtime;
 
-namespace SFContacts.SessionKeys {
+namespace Microsoft.Extensions.Caching.ServiceFabric.SessionKeys
+{
     [EventSource(Name = "MyCompany-SFContactsApplication-SFContacts.SessionKeys")]
     internal sealed class ServiceEventSource : EventSource {
         public static readonly ServiceEventSource Current = new ServiceEventSource();

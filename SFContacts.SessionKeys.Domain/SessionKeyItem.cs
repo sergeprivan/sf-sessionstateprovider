@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SFContacts.SessionKeys.Domain {
+namespace Microsoft.Extensions.Caching.ServiceFabric.SessionKeys.Domain {
     [Serializable]
     public class SessionKeyItem {
 

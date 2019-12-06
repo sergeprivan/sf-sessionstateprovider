@@ -13,9 +13,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microsoft.Extensions.Cachin
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microsoft.Extensions.Caching.ServiceFabric.UserSession", "Microsoft.Extensions.Caching.ServiceFabric.UserSession\Microsoft.Extensions.Caching.ServiceFabric.UserSession.csproj", "{30EDDF6A-DD00-4778-BB65-F2E64280DDDF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SFContacts.SessionKeys.Domain", "SFContacts.SessionKeys.Domain\SFContacts.SessionKeys.Domain.csproj", "{8780067B-6144-4373-BC79-7675EC3F707D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Microsoft.Extensions.Caching.ServiceFabric.SessionKeys.Domain", "SFContacts.SessionKeys.Domain\Microsoft.Extensions.Caching.ServiceFabric.SessionKeys.Domain.csproj", "{8780067B-6144-4373-BC79-7675EC3F707D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SFContracts.SessionKeys", "SFContracts.SessionKeys\SFContracts.SessionKeys.csproj", "{A6E25A89-3523-428E-B91D-C9E81F3F47EA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microsoft.Extensions.Caching.ServiceFabric.SessionKeys", "SFContracts.SessionKeys\Microsoft.Extensions.Caching.ServiceFabric.SessionKeys.csproj", "{A6E25A89-3523-428E-B91D-C9E81F3F47EA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
