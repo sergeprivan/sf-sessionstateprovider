@@ -36,6 +36,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Microsoft.Extensions.Caching.ServiceFabric.Test\Microsoft.Extensions.Caching.ServiceFabric.Test.csproj" />
     <ProjectReference Include="..\Microsoft.Extensions.Caching.ServiceFabric.UserSession\Microsoft.Extensions.Caching.ServiceFabric.UserSession.csproj" />
+    <ProjectReference Include="..\SFContracts.SessionKeys1\SFContracts.SessionKeys.csproj" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.Common.targets" />
   <PropertyGroup>

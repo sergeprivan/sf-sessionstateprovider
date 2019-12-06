@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="utf-8"?>
-<ServiceManifest Name="Microsoft.Extensions.Caching.ServiceFabric.TestPkg"
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ServiceManifest Name="SFContacts.SessionKeysPkg"
                  Version="1.0.0"
                  xmlns="http://schemas.microsoft.com/2011/01/fabric"
                  xmlns:xsd="http://www.w3.org/2001/XMLSchema"
@@ -7,20 +7,16 @@
   <ServiceTypes>
     <!-- This is the name of your ServiceType. 
          This name must match the string used in RegisterServiceType call in Program.cs. -->
-    <StatelessServiceType ServiceTypeName="Microsoft.Extensions.Caching.ServiceFabric.TestType" />
+    <StatefulServiceType ServiceTypeName="SFContacts.SessionKeysType" HasPersistedState="true" />
   </ServiceTypes>
 
   <!-- Code package is your service executable. -->
   <CodePackage Name="Code" Version="1.0.0">
     <EntryPoint>
       <ExeHost>
-        <Program>Microsoft.Extensions.Caching.ServiceFabric.Test.exe</Program>
-        <WorkingFolder>CodePackage</WorkingFolder>
+        <Program>SFContacts.SessionKeys.exe</Program>
       </ExeHost>
     </EntryPoint>
-    <EnvironmentVariables>
-      <EnvironmentVariable Name="ASPNETCORE_ENVIRONMENT" Value=""/>
-    </EnvironmentVariables>
   </CodePackage>
 
   <!-- Config package is the contents of the Config directoy under PackageRoot that contains an 
@@ -32,7 +28,12 @@
       <!-- This endpoint is used by the communication listener to obtain the port on which to 
            listen. Please note that if your service is partitioned, this port is shared with 
            replicas of different partitions that are placed in your code. -->
-      <Endpoint Protocol="http" Name="ServiceEndpoint" Type="Input" Port="8962"/>      
+      <Endpoint Name="ServiceEndpoint" />
+
+      <!-- This endpoint is used by the replicator for replicating the state of your service.
+           This endpoint is configured through a ReplicatorSettings config section in the Settings.xml
+           file under the ConfigPackage. -->
+      <Endpoint Name="ReplicatorEndpoint" />
     </Endpoints>
   </Resources>
 </ServiceManifest>

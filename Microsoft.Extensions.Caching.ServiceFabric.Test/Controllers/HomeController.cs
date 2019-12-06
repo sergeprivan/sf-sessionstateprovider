@@ -26,15 +26,19 @@ namespace Microsoft.Extensions.Caching.ServiceFabric.Test.Controllers
 
         public IActionResult Index()
         {
+            HttpContext.Session.LoadAsync().GetAwaiter();
+
             var sessionValue = "TestSession";
-            var checkValue = HttpContext.Session.GetString(sessionValue);
+            var sessionstartTime = HttpContext.Session.GetString("storedSessionStartTime");
 
-            if (string.IsNullOrEmpty(checkValue))
+            if (sessionstartTime == null)
             {
-                HttpContext.Session.SetString(sessionValue, sessionValue + Guid.NewGuid().ToString());
+                sessionstartTime = DateTime.Now.ToLongTimeString();
+                HttpContext.Session.SetString("storedSessionStartTime", sessionstartTime);
+                HttpContext.Session.CommitAsync().GetAwaiter();
             }
-
-            ViewData[sessionValue] = HttpContext.Session.GetString(sessionValue);
+            HttpContext.Session.LoadAsync().GetAwaiter();
+            ViewData[sessionValue] = HttpContext.Session.GetString("storedSessionStartTime");
 
             return View();
         }

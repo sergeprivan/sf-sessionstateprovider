@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.DataProtection.Repositories;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Session;
@@ -10,6 +11,11 @@ using Microsoft.Extensions.Caching.ServiceFabric.Security;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.AspNetCore.DataProtection;
+using Microsoft.Extensions.Caching.ServiceFabric.Test.Security;
+using Microsoft.Extensions.Caching.Distributed;
+using Microsoft.Extensions.Caching.ServiceFabric;
+using System.IO;
 
 namespace Microsoft.Extensions.Caching.ServiceFabric.Test
 {
@@ -27,7 +33,25 @@ namespace Microsoft.Extensions.Caching.ServiceFabric.Test
         {
             services.AddMvc();
             services.AddControllersWithViews();
+
+            services.AddSingleton<IXmlRepository, SFDataprotectionKeyRepository>();
+
+            var sp = services.BuildServiceProvider();
+
+            services.AddDataProtection()
+                .SetApplicationName("Microsoft.Extensions.Caching.ServiceFabric.Test")
+                .AddKeyManagementOptions(o => o.XmlRepository = sp.GetService<IXmlRepository>());
+
+            //services.AddDataProtection().SetApplicationName("Microsoft.Extensions.Caching.ServiceFabric.Test")
+            //    .PersistKeysToFileSystem(new DirectoryInfo(@"C:\TEMP\"));
+
+            //services
+            //    .AddDataProtection()
+            //    .SetApplicationName("Microsoft.Extensions.Caching.ServiceFabric.Test");
+
+
             services.AddDistributedServiceFabricCache(o => { o.TableName = "LabSessionState"; o.SessionService = new SessionService(); });
+
             services.AddSession(options =>
             {
                 options.Cookie.Name = ".AdventureWorks.Session";

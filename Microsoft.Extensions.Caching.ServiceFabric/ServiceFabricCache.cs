@@ -56,13 +56,11 @@ namespace Microsoft.Extensions.Caching.ServiceFabric
 
         public void Remove(string key)
         {
-            int i = 10;
             //_table.DeleteItemAsync(key).Wait();
         }
 
         public async Task RemoveAsync(string key, CancellationToken token = default(CancellationToken))
         {
-            int i = 10;
             //await _table.DeleteItemAsync(key);
         }
 
@@ -89,8 +87,6 @@ namespace Microsoft.Extensions.Caching.ServiceFabric
 
         private long GetEpochExpiry(DistributedCacheEntryOptions options, out ExpiryType expiryType)
         {
-            int i = 10;
-
             if (options.SlidingExpiration.HasValue)
             {
                 expiryType = ExpiryType.Sliding;
