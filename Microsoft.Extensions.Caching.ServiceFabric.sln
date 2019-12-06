@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29519.87
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{A07B5EB6-E848-4116-A8D0-A826331D98C6}") = "SFContactsApplication", "SFContactsApplication\SFContactsApplication.sfproj", "{0F987587-18BC-48A4-B6C3-0067B42151D1}"
+Project("{A07B5EB6-E848-4116-A8D0-A826331D98C6}") = "Microsoft.Extensions.Caching.ServiceFabric.Application", "SFContactsApplication\Microsoft.Extensions.Caching.ServiceFabric.Application.sfproj", "{0F987587-18BC-48A4-B6C3-0067B42151D1}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microsoft.Extensions.Caching.ServiceFabric", "Microsoft.Extensions.Caching.ServiceFabric\Microsoft.Extensions.Caching.ServiceFabric.csproj", "{71333294-730D-4F7E-B8C2-861879418008}"
 EndProject
