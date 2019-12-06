@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29519.87
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{A07B5EB6-E848-4116-A8D0-A826331D98C6}") = "Microsoft.Extensions.Caching.ServiceFabric.Application", "SFContactsApplication\Microsoft.Extensions.Caching.ServiceFabric.Application.sfproj", "{0F987587-18BC-48A4-B6C3-0067B42151D1}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microsoft.Extensions.Caching.ServiceFabric", "Microsoft.Extensions.Caching.ServiceFabric\Microsoft.Extensions.Caching.ServiceFabric.csproj", "{71333294-730D-4F7E-B8C2-861879418008}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microsoft.Extensions.Caching.ServiceFabric.Test", "Microsoft.Extensions.Caching.ServiceFabric.Test\Microsoft.Extensions.Caching.ServiceFabric.Test.csproj", "{6741A8E9-6833-4367-8D7A-3F3EDEA6D2E3}"
@@ -17,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Microsoft.Extensions.Cachin
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microsoft.Extensions.Caching.ServiceFabric.SessionKeys", "SFContracts.SessionKeys\Microsoft.Extensions.Caching.ServiceFabric.SessionKeys.csproj", "{A6E25A89-3523-428E-B91D-C9E81F3F47EA}"
 EndProject
+Project("{A07B5EB6-E848-4116-A8D0-A826331D98C6}") = "Microsoft.Extensions.Caching.ServiceFabric.Application", "Microsoft.Extensions.Caching.ServiceFabric.Application\Microsoft.Extensions.Caching.ServiceFabric.Application.sfproj", "{0F987587-18BC-48A4-B6C3-0067B42151D1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -25,14 +25,6 @@ Global
 		Release|x64 = Release|x64
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{0F987587-18BC-48A4-B6C3-0067B42151D1}.Debug|Any CPU.ActiveCfg = Debug|x64
-		{0F987587-18BC-48A4-B6C3-0067B42151D1}.Debug|x64.ActiveCfg = Debug|x64
-		{0F987587-18BC-48A4-B6C3-0067B42151D1}.Debug|x64.Build.0 = Debug|x64
-		{0F987587-18BC-48A4-B6C3-0067B42151D1}.Debug|x64.Deploy.0 = Debug|x64
-		{0F987587-18BC-48A4-B6C3-0067B42151D1}.Release|Any CPU.ActiveCfg = Release|x64
-		{0F987587-18BC-48A4-B6C3-0067B42151D1}.Release|x64.ActiveCfg = Release|x64
-		{0F987587-18BC-48A4-B6C3-0067B42151D1}.Release|x64.Build.0 = Release|x64
-		{0F987587-18BC-48A4-B6C3-0067B42151D1}.Release|x64.Deploy.0 = Release|x64
 		{71333294-730D-4F7E-B8C2-861879418008}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{71333294-730D-4F7E-B8C2-861879418008}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{71333294-730D-4F7E-B8C2-861879418008}.Debug|x64.ActiveCfg = Debug|Any CPU
@@ -81,6 +73,14 @@ Global
 		{A6E25A89-3523-428E-B91D-C9E81F3F47EA}.Release|Any CPU.Build.0 = Release|Any CPU
 		{A6E25A89-3523-428E-B91D-C9E81F3F47EA}.Release|x64.ActiveCfg = Release|Any CPU
 		{A6E25A89-3523-428E-B91D-C9E81F3F47EA}.Release|x64.Build.0 = Release|Any CPU
+		{0F987587-18BC-48A4-B6C3-0067B42151D1}.Debug|Any CPU.ActiveCfg = Debug|x64
+		{0F987587-18BC-48A4-B6C3-0067B42151D1}.Debug|x64.ActiveCfg = Debug|x64
+		{0F987587-18BC-48A4-B6C3-0067B42151D1}.Debug|x64.Build.0 = Debug|x64
+		{0F987587-18BC-48A4-B6C3-0067B42151D1}.Debug|x64.Deploy.0 = Debug|x64
+		{0F987587-18BC-48A4-B6C3-0067B42151D1}.Release|Any CPU.ActiveCfg = Release|x64
+		{0F987587-18BC-48A4-B6C3-0067B42151D1}.Release|x64.ActiveCfg = Release|x64
+		{0F987587-18BC-48A4-B6C3-0067B42151D1}.Release|x64.Build.0 = Release|x64
+		{0F987587-18BC-48A4-B6C3-0067B42151D1}.Release|x64.Deploy.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
