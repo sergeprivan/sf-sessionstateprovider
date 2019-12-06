@@ -68,7 +68,7 @@ namespace Microsoft.Extensions.Caching.ServiceFabric.Test.Security {
         }
         Uri KeyServiceUri {
             get {
-                return new ServiceUriBuilder("SFContacts.SessionKeys").ToUri();
+                return new ServiceUriBuilder("Microsoft.Extensions.Caching.ServiceFabric.SessionKeys").ToUri();
             }
         }
     }
