@@ -34,6 +34,7 @@
     <Content Include="PublishProfiles\DevSF.5Node.xml" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Microsoft.Extensions.Caching.ServiceFabric.SessionKeys\Microsoft.Extensions.Caching.ServiceFabric.SessionKeys.csproj" />
     <ProjectReference Include="..\Microsoft.Extensions.Caching.ServiceFabric.Test\Microsoft.Extensions.Caching.ServiceFabric.Test.csproj" />
     <ProjectReference Include="..\Microsoft.Extensions.Caching.ServiceFabric.UserSession\Microsoft.Extensions.Caching.ServiceFabric.UserSession.csproj" />
   </ItemGroup>
