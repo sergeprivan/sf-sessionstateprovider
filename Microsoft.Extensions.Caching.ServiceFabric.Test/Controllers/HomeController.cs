@@ -15,13 +15,8 @@ namespace Microsoft.Extensions.Caching.ServiceFabric.Test.Controllers
 {
     public class HomeController : Controller
     {
-        //private readonly ILogger<HomeController> _logger;
-        private readonly IDistributedCache _distributedCache;
-
-        public HomeController(IDistributedCache distributedCache)
+        public HomeController()
         {
-            //  _logger = logger;
-            _distributedCache = distributedCache;
         }
 
         public IActionResult Index()
