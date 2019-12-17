@@ -16,9 +16,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Microsoft.Extensions.Caching.ServiceFabric.SessionKeys.Domain\Microsoft.Extensions.Caching.ServiceFabric.SessionKeys.Domain.csproj" />
-    <ProjectReference Include="..\Microsoft.Extensions.Caching.ServiceFabric.SessionKeys\Microsoft.Extensions.Caching.ServiceFabric.SessionKeys.csproj" />
     <ProjectReference Include="..\Microsoft.Extensions.Caching.ServiceFabric\Microsoft.Extensions.Caching.ServiceFabric.csproj" />
+    <ProjectReference Include="..\SFContacts.SessionKeys.Domain\Microsoft.Extensions.Caching.ServiceFabric.SessionKeys.Domain.csproj" />
   </ItemGroup>
 
 </Project>

@@ -6,20 +6,16 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microsoft.Extensions.Caching.ServiceFabric", "Microsoft.Extensions.Caching.ServiceFabric\Microsoft.Extensions.Caching.ServiceFabric.csproj", "{71333294-730D-4F7E-B8C2-861879418008}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microsoft.Extensions.Caching.ServiceFabric.Test", "Microsoft.Extensions.Caching.ServiceFabric.Test\Microsoft.Extensions.Caching.ServiceFabric.Test.csproj", "{6741A8E9-6833-4367-8D7A-3F3EDEA6D2E3}"
-	ProjectSection(ProjectDependencies) = postProject
-		{8780067B-6144-4373-BC79-7675EC3F707D} = {8780067B-6144-4373-BC79-7675EC3F707D}
-		{5DB452F3-45C8-40E4-A86D-D387751081D9} = {5DB452F3-45C8-40E4-A86D-D387751081D9}
-	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microsoft.Extensions.Caching.ServiceFabric.UserSession.Interfaces", "Microsoft.Extensions.Caching.ServiceFabric.UserSession.Interfaces\Microsoft.Extensions.Caching.ServiceFabric.UserSession.Interfaces.csproj", "{AD8FD99D-7095-490A-8D30-DBBE7D3FFD8C}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microsoft.Extensions.Caching.ServiceFabric.UserSession", "Microsoft.Extensions.Caching.ServiceFabric.UserSession\Microsoft.Extensions.Caching.ServiceFabric.UserSession.csproj", "{30EDDF6A-DD00-4778-BB65-F2E64280DDDF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Microsoft.Extensions.Caching.ServiceFabric.SessionKeys.Domain", "SFContacts.SessionKeys.Domain\Microsoft.Extensions.Caching.ServiceFabric.SessionKeys.Domain.csproj", "{8780067B-6144-4373-BC79-7675EC3F707D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microsoft.Extensions.Caching.ServiceFabric.SessionKeys", "SFContracts.SessionKeys\Microsoft.Extensions.Caching.ServiceFabric.SessionKeys.csproj", "{A6E25A89-3523-428E-B91D-C9E81F3F47EA}"
+EndProject
 Project("{A07B5EB6-E848-4116-A8D0-A826331D98C6}") = "Microsoft.Extensions.Caching.ServiceFabric.Application", "Microsoft.Extensions.Caching.ServiceFabric.Application\Microsoft.Extensions.Caching.ServiceFabric.Application.sfproj", "{0F987587-18BC-48A4-B6C3-0067B42151D1}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microsoft.Extensions.Caching.ServiceFabric.SessionKeys", "Microsoft.Extensions.Caching.ServiceFabric.SessionKeys\Microsoft.Extensions.Caching.ServiceFabric.SessionKeys.csproj", "{5DB452F3-45C8-40E4-A86D-D387751081D9}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Microsoft.Extensions.Caching.ServiceFabric.SessionKeys.Domain", "Microsoft.Extensions.Caching.ServiceFabric.SessionKeys.Domain\Microsoft.Extensions.Caching.ServiceFabric.SessionKeys.Domain.csproj", "{8780067B-6144-4373-BC79-7675EC3F707D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -61,22 +57,6 @@ Global
 		{30EDDF6A-DD00-4778-BB65-F2E64280DDDF}.Release|Any CPU.Build.0 = Release|Any CPU
 		{30EDDF6A-DD00-4778-BB65-F2E64280DDDF}.Release|x64.ActiveCfg = Release|Any CPU
 		{30EDDF6A-DD00-4778-BB65-F2E64280DDDF}.Release|x64.Build.0 = Release|Any CPU
-		{0F987587-18BC-48A4-B6C3-0067B42151D1}.Debug|Any CPU.ActiveCfg = Debug|x64
-		{0F987587-18BC-48A4-B6C3-0067B42151D1}.Debug|x64.ActiveCfg = Debug|x64
-		{0F987587-18BC-48A4-B6C3-0067B42151D1}.Debug|x64.Build.0 = Debug|x64
-		{0F987587-18BC-48A4-B6C3-0067B42151D1}.Debug|x64.Deploy.0 = Debug|x64
-		{0F987587-18BC-48A4-B6C3-0067B42151D1}.Release|Any CPU.ActiveCfg = Release|x64
-		{0F987587-18BC-48A4-B6C3-0067B42151D1}.Release|x64.ActiveCfg = Release|x64
-		{0F987587-18BC-48A4-B6C3-0067B42151D1}.Release|x64.Build.0 = Release|x64
-		{0F987587-18BC-48A4-B6C3-0067B42151D1}.Release|x64.Deploy.0 = Release|x64
-		{5DB452F3-45C8-40E4-A86D-D387751081D9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5DB452F3-45C8-40E4-A86D-D387751081D9}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5DB452F3-45C8-40E4-A86D-D387751081D9}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{5DB452F3-45C8-40E4-A86D-D387751081D9}.Debug|x64.Build.0 = Debug|Any CPU
-		{5DB452F3-45C8-40E4-A86D-D387751081D9}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5DB452F3-45C8-40E4-A86D-D387751081D9}.Release|Any CPU.Build.0 = Release|Any CPU
-		{5DB452F3-45C8-40E4-A86D-D387751081D9}.Release|x64.ActiveCfg = Release|Any CPU
-		{5DB452F3-45C8-40E4-A86D-D387751081D9}.Release|x64.Build.0 = Release|Any CPU
 		{8780067B-6144-4373-BC79-7675EC3F707D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{8780067B-6144-4373-BC79-7675EC3F707D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8780067B-6144-4373-BC79-7675EC3F707D}.Debug|x64.ActiveCfg = Debug|x64
@@ -85,6 +65,22 @@ Global
 		{8780067B-6144-4373-BC79-7675EC3F707D}.Release|Any CPU.Build.0 = Release|Any CPU
 		{8780067B-6144-4373-BC79-7675EC3F707D}.Release|x64.ActiveCfg = Release|x64
 		{8780067B-6144-4373-BC79-7675EC3F707D}.Release|x64.Build.0 = Release|x64
+		{A6E25A89-3523-428E-B91D-C9E81F3F47EA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A6E25A89-3523-428E-B91D-C9E81F3F47EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A6E25A89-3523-428E-B91D-C9E81F3F47EA}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{A6E25A89-3523-428E-B91D-C9E81F3F47EA}.Debug|x64.Build.0 = Debug|Any CPU
+		{A6E25A89-3523-428E-B91D-C9E81F3F47EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A6E25A89-3523-428E-B91D-C9E81F3F47EA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A6E25A89-3523-428E-B91D-C9E81F3F47EA}.Release|x64.ActiveCfg = Release|Any CPU
+		{A6E25A89-3523-428E-B91D-C9E81F3F47EA}.Release|x64.Build.0 = Release|Any CPU
+		{0F987587-18BC-48A4-B6C3-0067B42151D1}.Debug|Any CPU.ActiveCfg = Debug|x64
+		{0F987587-18BC-48A4-B6C3-0067B42151D1}.Debug|x64.ActiveCfg = Debug|x64
+		{0F987587-18BC-48A4-B6C3-0067B42151D1}.Debug|x64.Build.0 = Debug|x64
+		{0F987587-18BC-48A4-B6C3-0067B42151D1}.Debug|x64.Deploy.0 = Debug|x64
+		{0F987587-18BC-48A4-B6C3-0067B42151D1}.Release|Any CPU.ActiveCfg = Release|x64
+		{0F987587-18BC-48A4-B6C3-0067B42151D1}.Release|x64.ActiveCfg = Release|x64
+		{0F987587-18BC-48A4-B6C3-0067B42151D1}.Release|x64.Build.0 = Release|x64
+		{0F987587-18BC-48A4-B6C3-0067B42151D1}.Release|x64.Deploy.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
