@@ -46,6 +46,8 @@ namespace Microsoft.Extensions.Caching.ServiceFabric.Test
                 options.Cookie.IsEssential = true;
             });
 
+            //test
+
 
         }
 
