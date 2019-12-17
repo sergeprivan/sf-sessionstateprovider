@@ -45,8 +45,7 @@ namespace Microsoft.Extensions.Caching.ServiceFabric.Test
                 options.IdleTimeout = TimeSpan.FromSeconds(10);
                 options.Cookie.IsEssential = true;
             });
-
-            //test 1123
+            //123
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
