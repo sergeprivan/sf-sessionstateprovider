@@ -46,9 +46,7 @@ namespace Microsoft.Extensions.Caching.ServiceFabric.Test
                 options.Cookie.IsEssential = true;
             });
 
-            //test
-
-
+            //test 1
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
