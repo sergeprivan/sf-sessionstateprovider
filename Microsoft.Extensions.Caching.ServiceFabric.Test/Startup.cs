@@ -40,17 +40,9 @@ namespace Microsoft.Extensions.Caching.ServiceFabric.Test
 
             services.AddDataProtection()
                 .SetApplicationName("Microsoft.Extensions.Caching.ServiceFabric.Test")
-                .AddKeyManagementOptions(o => o.XmlRepository = sp.GetService<IXmlRepository>());
+                .AddKeyManagementOptions(o => o.XmlRepository = sp.GetService<IXmlRepository>());     
 
-            //services.AddDataProtection().SetApplicationName("Microsoft.Extensions.Caching.ServiceFabric.Test")
-            //    .PersistKeysToFileSystem(new DirectoryInfo(@"C:\TEMP\"));
-
-            //services
-            //    .AddDataProtection()
-            //    .SetApplicationName("Microsoft.Extensions.Caching.ServiceFabric.Test");
-
-
-            services.AddDistributedServiceFabricCache(o => { o.TableName = "LabSessionState"; o.SessionService = new SessionService(); });
+            services.AddDistributedServiceFabricCache(o => { o.SessionService = new SessionService(); });
 
             services.AddSession(options =>
             {
