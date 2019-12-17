@@ -35,14 +35,9 @@ namespace Microsoft.Extensions.Caching.ServiceFabric.Test
             services.AddControllersWithViews();
 
             services.AddSingleton<IXmlRepository, SFDataprotectionKeyRepository>();
+            services.AddDataProtection().AddKeyManagementOptions(options => options.XmlRepository = new SFDataprotectionKeyRepository());
 
-            var sp = services.BuildServiceProvider();
-
-            services.AddDataProtection()
-                .SetApplicationName("Microsoft.Extensions.Caching.ServiceFabric.Test")
-                .AddKeyManagementOptions(o => o.XmlRepository = sp.GetService<IXmlRepository>());     
-
-            services.AddDistributedServiceFabricCache(o => { o.SessionService = new SessionService(); });
+            services.AddDistributedServiceFabricCache(o => { o.TableName = "test"; o.SessionService = new SessionService(); });
 
             services.AddSession(options =>
             {
