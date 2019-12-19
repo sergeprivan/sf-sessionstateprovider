@@ -1,6 +1,4 @@
 ﻿using Microsoft.AspNetCore.DataProtection.Repositories;
-using Microsoft.Extensions.Caching.ServiceFabric.SessionKeys.Domain;
-using Microsoft.Extensions.Caching.ServiceFabric.Test;
 using Microsoft.ServiceFabric.Services.Client;
 using Microsoft.ServiceFabric.Services.Remoting.Client;
 using System;
@@ -12,8 +10,9 @@ using System.Fabric.Query;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Xml.Linq;
+using Microsoft.Extensions.Caching.ServiceFabric;
 
-namespace Microsoft.Extensions.Caching.ServiceFabric.Test.Security
+namespace Microsoft.Extensions.Caching.ServiceFabric.SessionKeys.Domain
 {
     public class SFDataprotectionKeyRepository : IXmlRepository
     {
