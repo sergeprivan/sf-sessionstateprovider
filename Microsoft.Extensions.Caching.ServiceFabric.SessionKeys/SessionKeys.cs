@@ -18,7 +18,7 @@ namespace Microsoft.Extensions.Caching.ServiceFabric.SessionKeys
     internal sealed class SessionKeys : StatefulService, ISessionKeysService
     {
 
-        private const string SessionKeyDictionaryName = "SFContacts.ProtectionKeys";
+        private const string SessionKeyDictionaryName = "Microsoft.Extensions.Caching.ServiceFabric.SessionKeys.ProtectionKeys";
 
         public SessionKeys(StatefulServiceContext serviceContext)
             : this(serviceContext, new ReliableStateManager(serviceContext))
