@@ -105,7 +105,6 @@
     <Compile Include="ISessionKeysService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SessionKeyItem.cs" />
-    <Compile Include="SessionKeyItemId.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
