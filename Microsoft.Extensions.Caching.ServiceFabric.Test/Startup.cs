@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.DataProtection.Repositories;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Session;
-using Microsoft.Extensions.Caching.ServiceFabric.Security;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -37,7 +36,6 @@ namespace Microsoft.Extensions.Caching.ServiceFabric.Test
 
             services.AddSingleton<IXmlRepository, SFDataprotectionKeyRepository>();
             services.AddDataProtection().AddKeyManagementOptions(options => options.XmlRepository = new SFDataprotectionKeyRepository());
-
             services.AddDistributedServiceFabricCache(o => { o.TableName = "test"; o.SessionService = new SessionService(); });
 
             services.AddSession(options =>

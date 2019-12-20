@@ -1,15 +1,11 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.ServiceFabric.Actors;
+﻿using Microsoft.ServiceFabric.Actors;
 using Microsoft.ServiceFabric.Actors.Client;
 using Microsoft.Extensions.Caching.ServiceFabric.UserSession.Interfaces;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Claims;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Microsoft.Extensions.Caching.ServiceFabric.Security
+namespace Microsoft.Extensions.Caching.ServiceFabric
 {
     public class SessionService : ISessionService
     {
