@@ -12,9 +12,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Microsoft.Extensions.Caching.ServiceFabric.UserSession.Interfaces\Microsoft.Extensions.Caching.ServiceFabric.UserSession.Interfaces.csproj" />
     <PackageReference Include="Microsoft.ServiceFabric.Actors" Version="4.0.457" />
 
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Microsoft.Extensions.Caching.ServiceFabric.UserSession\Microsoft.Extensions.Caching.ServiceFabric.UserSession.csproj" />
   </ItemGroup>
 
 </Project>
