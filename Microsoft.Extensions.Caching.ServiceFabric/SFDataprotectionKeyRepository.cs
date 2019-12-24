@@ -4,19 +4,19 @@ using Microsoft.ServiceFabric.Services.Remoting.Client;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Diagnostics;
 using System.Fabric;
 using System.Fabric.Query;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 using Microsoft.Extensions.Caching.ServiceFabric;
+using Microsoft.Extensions.Caching.ServiceFabric.SessionKeys.Domain;
 
-namespace Microsoft.Extensions.Caching.ServiceFabric.SessionKeys.Domain
+namespace Microsoft.Extensions.Caching.ServiceFabric
 {
     public class SFDataprotectionKeyRepository : IXmlRepository
     {
-        static FabricClient fabricClient = new FabricClient();
+        static FabricClient _fabricClient = new FabricClient();
 
         public SFDataprotectionKeyRepository()
         {
@@ -76,7 +76,7 @@ namespace Microsoft.Extensions.Caching.ServiceFabric.SessionKeys.Domain
 
         private async Task<ServicePartitionList> getPartitions()
         {
-            return await fabricClient.QueryManager.GetPartitionListAsync(KeyServiceUri);
+            return await _fabricClient.QueryManager.GetPartitionListAsync(KeyServiceUri);
         }
 
         Uri KeyServiceUri

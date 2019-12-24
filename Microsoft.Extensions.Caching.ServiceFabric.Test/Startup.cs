@@ -1,21 +1,11 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.DataProtection.Repositories;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Session;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.AspNetCore.DataProtection;
-using Microsoft.Extensions.Caching.ServiceFabric.SessionKeys;
-using Microsoft.Extensions.Caching.Distributed;
-using Microsoft.Extensions.Caching.ServiceFabric;
-using System.IO;
-using Microsoft.Extensions.Caching.ServiceFabric.SessionKeys.Domain;
 
 namespace Microsoft.Extensions.Caching.ServiceFabric.Test
 {
