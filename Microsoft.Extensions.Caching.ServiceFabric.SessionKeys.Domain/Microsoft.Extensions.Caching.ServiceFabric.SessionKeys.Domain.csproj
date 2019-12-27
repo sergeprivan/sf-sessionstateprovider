@@ -102,9 +102,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ISessionKeysService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SessionKeyItem.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

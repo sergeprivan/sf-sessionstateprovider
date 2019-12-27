@@ -16,8 +16,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Microsoft.Extensions.Caching.ServiceFabric.SessionKeys.Domain\Microsoft.Extensions.Caching.ServiceFabric.SessionKeys.Domain.csproj" />
-    <ProjectReference Include="..\Microsoft.Extensions.Caching.ServiceFabric.UserSession\Microsoft.Extensions.Caching.ServiceFabric.UserSession.csproj" />
+    <ProjectReference Include="..\Microsoft.Extensions.Caching.ServiceFabric.SessionKeys.Interfaces\Microsoft.Extensions.Caching.ServiceFabric.SessionKeys.Interfaces.csproj" />
+    <ProjectReference Include="..\Microsoft.Extensions.Caching.ServiceFabric.UserSession.Interfaces\Microsoft.Extensions.Caching.ServiceFabric.UserSession.Interfaces.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="NewFolder\" />
   </ItemGroup>
 
 </Project>

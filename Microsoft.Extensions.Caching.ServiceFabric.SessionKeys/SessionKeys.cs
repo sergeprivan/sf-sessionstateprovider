@@ -8,7 +8,7 @@ using Microsoft.ServiceFabric.Services.Communication.Runtime;
 using Microsoft.ServiceFabric.Services.Runtime;
 using Microsoft.ServiceFabric.Services.Remoting.Runtime;
 using Microsoft.ServiceFabric.Data;
-using Microsoft.Extensions.Caching.ServiceFabric.SessionKeys.Domain;
+using Microsoft.Extensions.Caching.ServiceFabric.SessionKeys.Interfaces;
 
 namespace Microsoft.Extensions.Caching.ServiceFabric.SessionKeys
 {
