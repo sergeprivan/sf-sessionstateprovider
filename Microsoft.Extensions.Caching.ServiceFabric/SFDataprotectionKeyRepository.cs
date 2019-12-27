@@ -14,11 +14,11 @@ using Microsoft.Extensions.Caching.ServiceFabric.SessionKeys.Interfaces;
 
 namespace Microsoft.Extensions.Caching.ServiceFabric
 {
-    public class SFDataprotectionKeyRepository : IXmlRepository
+    public class ServiceFabricDataProtectionRepository : IXmlRepository
     {
         static FabricClient _fabricClient = new FabricClient();
 
-        public SFDataprotectionKeyRepository()
+        public ServiceFabricDataProtectionRepository()
         {
         }
 
@@ -35,7 +35,7 @@ namespace Microsoft.Extensions.Caching.ServiceFabric
             }
             catch (Exception ex)
             {
-                ServiceEventSource.Current.Message($"{nameof(SFDataprotectionKeyRepository)}->GetAllElements() failed to retrieve Data Protection Keys with error: {ex.ToString()}");
+                ServiceEventSource.Current.Message($"{nameof(ServiceFabricDataProtectionRepository)}->GetAllElements() failed to retrieve Data Protection Keys with error: {ex.ToString()}");
             }
             return null;
         }
@@ -55,7 +55,7 @@ namespace Microsoft.Extensions.Caching.ServiceFabric
             }
             catch (Exception ex)
             {
-                ServiceEventSource.Current.Message($"{nameof(SFDataprotectionKeyRepository)}->StoreElement() failed to save Data Protection Keys with error: {ex.ToString()}");
+                ServiceEventSource.Current.Message($"{nameof(ServiceFabricDataProtectionRepository)}->StoreElement() failed to save Data Protection Keys with error: {ex.ToString()}");
             }
 
         }
