@@ -11,7 +11,7 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.ServiceFabric.Actors" Version="4.0.457" />
-  </ItemGroup>
+  </ItemGroup> 
 
   <ItemGroup>
     <ProjectReference Include="..\Microsoft.Extensions.Caching.ServiceFabric.UserSession.Interfaces\Microsoft.Extensions.Caching.ServiceFabric.UserSession.Interfaces.csproj" />

@@ -1,21 +1,11 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.DataProtection.Repositories;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Session;
-using Microsoft.Extensions.Caching.ServiceFabric.Security;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.AspNetCore.DataProtection;
-using Microsoft.Extensions.Caching.ServiceFabric.Test.Security;
-using Microsoft.Extensions.Caching.Distributed;
-using Microsoft.Extensions.Caching.ServiceFabric;
-using System.IO;
 
 namespace Microsoft.Extensions.Caching.ServiceFabric.Test
 {
@@ -34,9 +24,8 @@ namespace Microsoft.Extensions.Caching.ServiceFabric.Test
             services.AddMvc();
             services.AddControllersWithViews();
 
-            services.AddSingleton<IXmlRepository, SFDataprotectionKeyRepository>();
-            services.AddDataProtection().AddKeyManagementOptions(options => options.XmlRepository = new SFDataprotectionKeyRepository());
-
+            services.AddSingleton<IXmlRepository, ServiceFabricDataProtectionRepository>();
+            services.AddDataProtection().AddKeyManagementOptions(options => options.XmlRepository = new ServiceFabricDataProtectionRepository());
             services.AddDistributedServiceFabricCache(o => { o.TableName = "test"; o.SessionService = new SessionService(); });
 
             services.AddSession(options =>
@@ -45,8 +34,6 @@ namespace Microsoft.Extensions.Caching.ServiceFabric.Test
                 options.IdleTimeout = TimeSpan.FromSeconds(10);
                 options.Cookie.IsEssential = true;
             });
-
-            //test 14
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

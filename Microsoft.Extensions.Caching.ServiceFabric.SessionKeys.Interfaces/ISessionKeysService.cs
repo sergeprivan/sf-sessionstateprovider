@@ -6,9 +6,10 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Microsoft.Extensions.Caching.ServiceFabric.SessionKeys.Domain
+namespace Microsoft.Extensions.Caching.ServiceFabric.SessionKeys.Interfaces
 {
-    public interface ISessionKeysService : IService {
+    public interface ISessionKeysService : IService
+    {
         Task<long> GetKeyCountAsync(CancellationToken cancellationToken);
         Task AddKey(SessionKeyItem keyItem);
         Task<IEnumerable<SessionKeyItem>> GetKeys(CancellationToken cancellationToken);
