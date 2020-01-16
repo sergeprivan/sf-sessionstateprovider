@@ -46,6 +46,19 @@ namespace Microsoft.Extensions.Caching.ServiceFabric
             return null;
         }
 
+        public async Task RemoveSessionItem(string userSessionId, string key)
+        {
+            try
+            {
+                var sessionActor = GetSessionActor(userSessionId);
+                await sessionActor?.RemoveSessionItem(key, CancellationToken.None);
+            }
+            catch (Exception ex)
+            {
+                ServiceEventSource.Current.Message($"Method {nameof(SessionService)}->RemoveSessionItem<T>() failed with error: {ex.ToString()} at: {DateTime.UtcNow}");
+            }
+        }
+
         public IUserSession GetSessionActor(string userSessionId)
         {
 
