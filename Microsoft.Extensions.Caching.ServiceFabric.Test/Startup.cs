@@ -30,7 +30,7 @@ namespace Microsoft.Extensions.Caching.ServiceFabric.Test
 
             services.AddSession(options =>
             {
-                options.Cookie.Name = ".AdventureWorks.Session";
+                options.Cookie.Name = ".ServiceFabric.Test.Session";
                 options.IdleTimeout = TimeSpan.FromSeconds(10);
                 options.Cookie.IsEssential = true;
             });
