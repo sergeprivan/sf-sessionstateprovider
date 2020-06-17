@@ -9,9 +9,11 @@ namespace Microsoft.Extensions.Caching.ServiceFabric
 {
     public class SessionService : ISessionService
     {
+        ServiceUriBuilder _userSessionUriBuilder;
+
         public SessionService()
         {
-            UserSessionUriBuilder = new ServiceUriBuilder("UserSessionActorService");
+            _userSessionUriBuilder = new ServiceUriBuilder("UserSessionActorService");
         }
 
         public async Task AddSessionItem(string userSessionId, string key, byte[] value)
@@ -33,10 +35,6 @@ namespace Microsoft.Extensions.Caching.ServiceFabric
             {
                 var sessionActor = GetSessionActor(userSessionId);
                 var sessionItemValue = await sessionActor?.GetSessionItem(key, CancellationToken.None);
-                if (sessionItemValue == null)
-                {
-                    return null;
-                }
                 return sessionItemValue;
             }
             catch (Exception ex)
@@ -67,10 +65,8 @@ namespace Microsoft.Extensions.Caching.ServiceFabric
                 return null;
             }
             var actorId = new ActorId(userSessionId);
-            return ActorProxy.Create<IUserSession>(actorId, UserSessionUriBuilder.ToUri());
-        }
-
-
-        ServiceUriBuilder UserSessionUriBuilder { get; }
+            return ActorProxy.Create<IUserSession>(actorId, _userSessionUriBuilder.ToUri());
+        }        
+        
     }
 }

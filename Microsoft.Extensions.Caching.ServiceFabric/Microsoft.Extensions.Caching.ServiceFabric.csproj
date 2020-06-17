@@ -5,6 +5,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="NewFolder\**" />
+    <EmbeddedResource Remove="NewFolder\**" />
+    <None Remove="NewFolder\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.DataProtection" Version="3.1.0" />
     <PackageReference Include="Microsoft.Extensions.Caching.Abstractions" Version="3.1.0" />
     <PackageReference Include="Microsoft.ServiceFabric.Actors" Version="4.0.457" />
@@ -18,10 +24,6 @@
   <ItemGroup>
     <ProjectReference Include="..\Microsoft.Extensions.Caching.ServiceFabric.SessionKeys.Interfaces\Microsoft.Extensions.Caching.ServiceFabric.SessionKeys.Interfaces.csproj" />
     <ProjectReference Include="..\Microsoft.Extensions.Caching.ServiceFabric.UserSession.Interfaces\Microsoft.Extensions.Caching.ServiceFabric.UserSession.Interfaces.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="NewFolder\" />
   </ItemGroup>
 
 </Project>
