@@ -17,6 +17,7 @@ namespace Microsoft.Extensions.Caching.ServiceFabric
     public class ServiceFabricDataProtectionRepository : IXmlRepository
     {
         static FabricClient _fabricClient = new FabricClient();
+        static Uri _keyServiceUri = new ServiceUriBuilder("Microsoft.Extensions.Caching.ServiceFabric.SessionKeys").ToUri();
 
         public ServiceFabricDataProtectionRepository()
         {
@@ -48,7 +49,7 @@ namespace Microsoft.Extensions.Caching.ServiceFabric
                 foreach (var partition in partitions)
                 {
                     long minKey = (partition.PartitionInformation as Int64RangePartitionInformation).LowKey;
-                    var keysService = ServiceProxy.Create<ISessionKeysService>(KeyServiceUri, new ServicePartitionKey(minKey));
+                    var keysService = ServiceProxy.Create<ISessionKeysService>(_keyServiceUri, new ServicePartitionKey(minKey));
                     var newKey = new SessionKeyItem(friendlyName, element.ToString());
                     keysService.AddKey(newKey);
                 }
@@ -67,7 +68,7 @@ namespace Microsoft.Extensions.Caching.ServiceFabric
             foreach (var partition in partitions)
             {
                 long minKey = (partition.PartitionInformation as Int64RangePartitionInformation).LowKey;
-                var keysService = ServiceProxy.Create<ISessionKeysService>(KeyServiceUri, new ServicePartitionKey(minKey));
+                var keysService = ServiceProxy.Create<ISessionKeysService>(_keyServiceUri, new ServicePartitionKey(minKey));
                 var partitionKeys = keysService.GetKeys(CancellationToken.None).GetAwaiter().GetResult();
                 keys.AddRange(partitionKeys);
             }
@@ -76,15 +77,7 @@ namespace Microsoft.Extensions.Caching.ServiceFabric
 
         private async Task<ServicePartitionList> getPartitions()
         {
-            return await _fabricClient.QueryManager.GetPartitionListAsync(KeyServiceUri);
-        }
-
-        Uri KeyServiceUri
-        {
-            get
-            {
-                return new ServiceUriBuilder("Microsoft.Extensions.Caching.ServiceFabric.SessionKeys").ToUri();
-            }
+            return await _fabricClient.QueryManager.GetPartitionListAsync(_keyServiceUri);
         }
     }
 }
