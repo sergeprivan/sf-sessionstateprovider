@@ -16,6 +16,7 @@ namespace Microsoft.Extensions.Caching.ServiceFabric
 {
     public class ServiceFabricDataProtectionRepository : IXmlRepository
     {
+        // TODO share FabricClient for better performance https://stackoverflow.com/questions/37774965/how-to-enumerate-all-partitions-and-aggregate-results
         static FabricClient _fabricClient = new FabricClient();
         static Uri _keyServiceUri = new ServiceUriBuilder("Microsoft.Extensions.Caching.ServiceFabric.SessionKeys").ToUri();
 
@@ -28,10 +29,12 @@ namespace Microsoft.Extensions.Caching.ServiceFabric
             try
             {
                 var results = new List<XElement>();
+
                 foreach (var key in GetAllCurrentKeys())
                 {
                     results.Add(XElement.Parse(key.Value));
                 }
+
                 return new ReadOnlyCollection<XElement>(results);
             }
             catch (Exception ex)
@@ -45,7 +48,7 @@ namespace Microsoft.Extensions.Caching.ServiceFabric
         {
             try
             {
-                var partitions = getPartitions().GetAwaiter().GetResult();
+                var partitions = GetPartitions().GetAwaiter().GetResult();
                 foreach (var partition in partitions)
                 {
                     long minKey = (partition.PartitionInformation as Int64RangePartitionInformation).LowKey;
@@ -64,7 +67,7 @@ namespace Microsoft.Extensions.Caching.ServiceFabric
         private IEnumerable<SessionKeyItem> GetAllCurrentKeys()
         {
             var keys = new List<SessionKeyItem>();
-            var partitions = getPartitions().GetAwaiter().GetResult();
+            var partitions = GetPartitions().GetAwaiter().GetResult();
             foreach (var partition in partitions)
             {
                 long minKey = (partition.PartitionInformation as Int64RangePartitionInformation).LowKey;
@@ -75,7 +78,7 @@ namespace Microsoft.Extensions.Caching.ServiceFabric
             return keys;
         }
 
-        private async Task<ServicePartitionList> getPartitions()
+        private async Task<ServicePartitionList> GetPartitions()
         {
             return await _fabricClient.QueryManager.GetPartitionListAsync(_keyServiceUri);
         }
