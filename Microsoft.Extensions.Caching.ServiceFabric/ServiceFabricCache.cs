@@ -56,11 +56,13 @@ namespace Microsoft.Extensions.Caching.ServiceFabric
 
         public void Remove(string key)
         {
+            throw new NotImplementedException();
             //_table.DeleteItemAsync(key).Wait();
         }
 
         public async Task RemoveAsync(string key, CancellationToken token = default(CancellationToken))
         {
+            throw new NotImplementedException();
             //await _table.DeleteItemAsync(key);
         }
 
