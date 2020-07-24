@@ -16,7 +16,7 @@ namespace Microsoft.Extensions.Caching.ServiceFabric.UserSession
     /// The StatePersistence attribute determines persistence and replication of actor state:
     ///  - Persisted: State is written to disk and replicated.
     ///  - Volatile: State is kept in memory only and replicated.
-    ///  - None: State is kept in memory only and not replicated.
+    ///  - None: State is kept in memory only and not replicated. ?
     /// </remarks>
     [StatePersistence(StatePersistence.Persisted)]
     internal class UserSession : Actor, IUserSession
