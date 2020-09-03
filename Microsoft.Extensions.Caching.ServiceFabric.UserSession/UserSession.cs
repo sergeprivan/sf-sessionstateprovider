@@ -8,6 +8,8 @@ using Microsoft.ServiceFabric.Actors.Runtime;
 using Microsoft.ServiceFabric.Actors.Client;
 using Microsoft.Extensions.Caching.ServiceFabric.UserSession.Interfaces;
 
+//TODO: remove actros and replace it with RC because same user can access session from different threads.
+
 namespace Microsoft.Extensions.Caching.ServiceFabric.UserSession
 {
     /// <remarks>
