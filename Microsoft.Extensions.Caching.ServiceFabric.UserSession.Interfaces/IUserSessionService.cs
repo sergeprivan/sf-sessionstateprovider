@@ -10,12 +10,8 @@ namespace Microsoft.Extensions.Caching.ServiceFabric.UserSession.Interfaces
 {
     public interface IUserSessionService : IService
     {
-        //Task<long> GetKeyCountAsync(CancellationToken cancellationToken);
-        //Task AddKey(SessionKeyItem keyItem);
-        //Task<IEnumerable<SessionKeyItem>> GetKeys(CancellationToken cancellationToken);
-
-        Task<byte[]> GetSessionItem(string key, CancellationToken cancellationToken);
-        Task SetSessionItem(string key, byte[] value, CancellationToken cancellationToken);
-        Task RemoveSessionItem(string key, CancellationToken cancellationToken);
+        Task<SessionKeyItem> GetSessionItem(SessionKeyItemId sessionKeyItemId, CancellationToken cancellationToken);
+        Task SetSessionItem(SessionKeyItem sessionKeyItem, CancellationToken cancellationToken);
+        Task RemoveSessionItem(SessionKeyItemId sessionKeyItemId, CancellationToken cancellationToken);
     }
 }
