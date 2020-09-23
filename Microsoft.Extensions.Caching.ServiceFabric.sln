@@ -16,7 +16,7 @@ Project("{A07B5EB6-E848-4116-A8D0-A826331D98C6}") = "Microsoft.Extensions.Cachin
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microsoft.Extensions.Caching.ServiceFabric.SessionKeys", "Microsoft.Extensions.Caching.ServiceFabric.SessionKeys\Microsoft.Extensions.Caching.ServiceFabric.SessionKeys.csproj", "{5DB452F3-45C8-40E4-A86D-D387751081D9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Microsoft.Extensions.Caching.ServiceFabric.SessionKeys.Interfaces", "Microsoft.Extensions.Caching.ServiceFabric.SessionKeys.Interfaces\Microsoft.Extensions.Caching.ServiceFabric.SessionKeys.Interfaces.csproj", "{CFAE53E5-ACC4-4F1B-8F00-FDBAD3F094C7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microsoft.Extensions.Caching.ServiceFabric.SessionKeys.Interfaces", "Microsoft.Extensions.Caching.ServiceFabric.SessionKeys.Interfaces\Microsoft.Extensions.Caching.ServiceFabric.SessionKeys.Interfaces.csproj", "{CFAE53E5-ACC4-4F1B-8F00-FDBAD3F094C7}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microsoft.Extensions.Caching.ServiceFabric.UserSession.Interfaces", "Microsoft.Extensions.Caching.ServiceFabric.UserSession.Interfaces\Microsoft.Extensions.Caching.ServiceFabric.UserSession.Interfaces.csproj", "{BFA33B6C-6F71-4C88-BE31-865EFB354B58}"
 EndProject

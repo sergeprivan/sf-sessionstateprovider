@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.ServiceFabric.Services.Client;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,21 +10,25 @@ namespace Microsoft.Extensions.Caching.ServiceFabric.SessionKeys.Interfaces
     [Serializable]
     public class SessionKeyItem
     {
-
-        public SessionKeyItem(string key, string value, Guid? id = null)
+        public SessionKeyItem(string key, string value, SessionKeyItemId id = null)
         {
-            Id = id ?? Guid.NewGuid();
+            Id = id ?? new SessionKeyItemId();
             Key = key;
             Value = value;
         }
 
-        public Guid Id { get; }
+        public SessionKeyItemId Id { get; }
         public string Key { get; }
         public string Value { get; }
 
         public override string ToString()
         {
             return $"Session Key: {Key} with Value: {Value} at: {DateTime.UtcNow}";
+        }
+
+        public ServicePartitionKey GetPartitionKey()
+        {
+            return new ServicePartitionKey(HashUtil.GetLongHashCode(Key));
         }
     }
 }

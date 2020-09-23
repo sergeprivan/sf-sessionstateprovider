@@ -31,7 +31,7 @@ namespace Microsoft.Extensions.Caching.ServiceFabric.SessionKeys
 
         public async Task<long> GetKeyCountAsync(CancellationToken cancellationToken)
         {
-            var sessionKeyItems = await StateManager.GetOrAddAsync<IReliableDictionary<Guid, SessionKeyItem>>(SessionKeyDictionaryName);
+            var sessionKeyItems = await StateManager.GetOrAddAsync<IReliableDictionary<SessionKeyItemId, SessionKeyItem>>(SessionKeyDictionaryName);
 
             ServiceEventSource.Current.Message($"Method started {nameof(SessionKeys)}->GetKeyCountAsync() at: {DateTime.UtcNow}");
 
@@ -49,7 +49,7 @@ namespace Microsoft.Extensions.Caching.ServiceFabric.SessionKeys
         }
         public async Task AddKey(SessionKeyItem keyItem)
         {
-            var sessionKeyItems = await StateManager.GetOrAddAsync<IReliableDictionary<Guid, SessionKeyItem>>(SessionKeyDictionaryName);
+            var sessionKeyItems = await StateManager.GetOrAddAsync<IReliableDictionary<SessionKeyItemId, SessionKeyItem>>(SessionKeyDictionaryName);
 
             ServiceEventSource.Current.Message($"Method started {nameof(SessionKeys)}->AddKey() at: {DateTime.UtcNow}");
             using (var tx = StateManager.CreateTransaction())
@@ -62,7 +62,7 @@ namespace Microsoft.Extensions.Caching.ServiceFabric.SessionKeys
 
         public async Task<IEnumerable<SessionKeyItem>> GetKeys(CancellationToken cancellationToken)
         {
-            var sessionKeyItems = await StateManager.GetOrAddAsync<IReliableDictionary<Guid, SessionKeyItem>>(SessionKeyDictionaryName);
+            var sessionKeyItems = await StateManager.GetOrAddAsync<IReliableDictionary<SessionKeyItemId, SessionKeyItem>>(SessionKeyDictionaryName);
 
             ServiceEventSource.Current.Message($"Method started {nameof(SessionKeys)}->GetKeys() at: {DateTime.UtcNow}");
             var results = new List<SessionKeyItem>();

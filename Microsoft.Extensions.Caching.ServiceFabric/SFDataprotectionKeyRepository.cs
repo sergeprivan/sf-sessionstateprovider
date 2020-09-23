@@ -51,9 +51,8 @@ namespace Microsoft.Extensions.Caching.ServiceFabric
                 var partitions = GetPartitions().GetAwaiter().GetResult();
                 foreach (var partition in partitions)
                 {
-                    long minKey = (partition.PartitionInformation as Int64RangePartitionInformation).LowKey;
-                    var keysService = ServiceProxy.Create<ISessionKeysService>(_keyServiceUri, new ServicePartitionKey(minKey));
                     var newKey = new SessionKeyItem(friendlyName, element.ToString());
+                    var keysService = ServiceProxy.Create<ISessionKeysService>(_keyServiceUri, newKey.Id.GetPartitionKey());                    
                     keysService.AddKey(newKey);
                 }
             }
@@ -61,7 +60,6 @@ namespace Microsoft.Extensions.Caching.ServiceFabric
             {
                 ServiceEventSource.Current.Message($"{nameof(ServiceFabricDataProtectionRepository)}->StoreElement() failed to save Data Protection Keys with error: {ex.ToString()}");
             }
-
         }
 
         private IEnumerable<SessionKeyItem> GetAllCurrentKeys()
