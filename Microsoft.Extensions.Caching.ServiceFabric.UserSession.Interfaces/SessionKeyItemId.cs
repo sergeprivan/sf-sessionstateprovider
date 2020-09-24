@@ -15,6 +15,11 @@ namespace Microsoft.Extensions.Caching.ServiceFabric.UserSession.Interfaces
             Id = Guid.NewGuid();
         }
 
+        public SessionKeyItemId(string id)
+        {
+            Id = Guid.Parse(id);
+        }
+
         public Guid Id { get; }
 
         public override string ToString()
