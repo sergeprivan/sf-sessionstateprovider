@@ -60,7 +60,7 @@ namespace Microsoft.Extensions.Caching.ServiceFabric
             try
             {
                 var sessionActor = GetSessionActor(userSessionId);
-                //await sessionActor?.RemoveSessionItem(key, CancellationToken.None);
+                await sessionActor?.RemoveSessionItem(new SessionKeyItemId(userSessionId), CancellationToken.None);
             }
             catch (Exception ex)
             {
@@ -73,7 +73,6 @@ namespace Microsoft.Extensions.Caching.ServiceFabric
             try
             {
                 var userSessionService = ServiceProxy.Create<IUserSessionService>(_keyServiceUri, new SessionKeyItemId(userSessionId).GetPartitionKey());
-                //var sessionItem = userSessionService.GetSessionItem(new SessionKeyItemId(), CancellationToken.None);
                 return userSessionService;
             }
             catch (Exception ex)
