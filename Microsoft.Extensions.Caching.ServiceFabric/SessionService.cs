@@ -26,7 +26,7 @@ namespace Microsoft.Extensions.Caching.ServiceFabric
         {
             try
             {
-                var sessionActor = GetSessionActor(userSessionId);
+                var sessionActor = GetSessionServiceByUserSessionId(userSessionId);
 
                 var sessionKeyItem = new SessionKeyItem(key, value);
 
@@ -42,7 +42,7 @@ namespace Microsoft.Extensions.Caching.ServiceFabric
         {
             try
             {
-                var sessionActor = GetSessionActor(userSessionId);
+                var sessionActor = GetSessionServiceByUserSessionId(userSessionId);
                 
                 var sessionItemValue = await sessionActor?.GetSessionItem(new SessionKeyItemId(userSessionId), CancellationToken.None);
                 
@@ -59,7 +59,7 @@ namespace Microsoft.Extensions.Caching.ServiceFabric
         {
             try
             {
-                var sessionActor = GetSessionActor(userSessionId);
+                var sessionActor = GetSessionServiceByUserSessionId(userSessionId);
                 await sessionActor?.RemoveSessionItem(new SessionKeyItemId(userSessionId), CancellationToken.None);
             }
             catch (Exception ex)
@@ -68,7 +68,7 @@ namespace Microsoft.Extensions.Caching.ServiceFabric
             }
         }
 
-        public IUserSessionService GetSessionActor(string userSessionId)
+        public IUserSessionService GetSessionServiceByUserSessionId(string userSessionId)
         {
             try
             {
