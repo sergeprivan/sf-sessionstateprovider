@@ -27,6 +27,8 @@ namespace Microsoft.Extensions.Caching.ServiceFabric.UserSession
     /// </remarks>
     internal class UserSessionService : StatefulService, IUserSessionService
     {
+        private const string SessionKeyDictionaryName = "Microsoft.Extensions.Caching.ServiceFabric.SessionKeys.UserSessionService";
+
         public async Task<SessionKeyItem> GetSessionItem(SessionKeyItemId sessionKeyItemId, CancellationToken cancellationToken)
         {
 
@@ -68,7 +70,6 @@ namespace Microsoft.Extensions.Caching.ServiceFabric.UserSession
             ServiceEventSource.Current.Message($"Method ended {nameof(UserSessionService)}->SetSessionItem() at: {DateTime.UtcNow}");
         }
 
-        private const string SessionKeyDictionaryName = "Microsoft.Extensions.Caching.ServiceFabric.SessionKeys.ProtectionKeys";
 
         public UserSessionService(StatefulServiceContext serviceContext)
             : this(serviceContext, new ReliableStateManager(serviceContext))
