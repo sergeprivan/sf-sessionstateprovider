@@ -5,7 +5,6 @@ using System.Fabric;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Microsoft.ServiceFabric.Actors.Runtime;
 
 namespace SFContacts.UserSession {
     [EventSource(Name = "MyCompany-SFContactsApplication-SFContacts.UserSession")]
@@ -55,27 +54,27 @@ namespace SFContacts.UserSession {
             }
         }
 
-        [NonEvent]
-        public void ActorMessage(Actor actor, string message, params object[] args) {
-            if (this.IsEnabled()
-                && actor.Id != null
-                && actor.ActorService != null
-                && actor.ActorService.Context != null
-                && actor.ActorService.Context.CodePackageActivationContext != null) {
-                string finalMessage = string.Format(message, args);
-                ActorMessage(
-                    actor.GetType().ToString(),
-                    actor.Id.ToString(),
-                    actor.ActorService.Context.CodePackageActivationContext.ApplicationTypeName,
-                    actor.ActorService.Context.CodePackageActivationContext.ApplicationName,
-                    actor.ActorService.Context.ServiceTypeName,
-                    actor.ActorService.Context.ServiceName.ToString(),
-                    actor.ActorService.Context.PartitionId,
-                    actor.ActorService.Context.ReplicaId,
-                    actor.ActorService.Context.NodeContext.NodeName,
-                    finalMessage);
-            }
-        }
+        //[NonEvent]
+        //public void ActorMessage(Actor actor, string message, params object[] args) {
+        //    if (this.IsEnabled()
+        //        && actor.Id != null
+        //        && actor.ActorService != null
+        //        && actor.ActorService.Context != null
+        //        && actor.ActorService.Context.CodePackageActivationContext != null) {
+        //        string finalMessage = string.Format(message, args);
+        //        ActorMessage(
+        //            actor.GetType().ToString(),
+        //            actor.Id.ToString(),
+        //            actor.ActorService.Context.CodePackageActivationContext.ApplicationTypeName,
+        //            actor.ActorService.Context.CodePackageActivationContext.ApplicationName,
+        //            actor.ActorService.Context.ServiceTypeName,
+        //            actor.ActorService.Context.ServiceName.ToString(),
+        //            actor.ActorService.Context.PartitionId,
+        //            actor.ActorService.Context.ReplicaId,
+        //            actor.ActorService.Context.NodeContext.NodeName,
+        //            finalMessage);
+        //    }
+        //}
 
         // For very high-frequency events it might be advantageous to raise events using WriteEventCore API.
         // This results in more efficient parameter handling, but requires explicit allocation of EventData structure and unsafe code.

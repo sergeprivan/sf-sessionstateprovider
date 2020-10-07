@@ -5,12 +5,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Microsoft.Extensions.Caching.ServiceFabric.SessionKeys.Interfaces
+namespace Microsoft.Extensions.Caching.ServiceFabric.UserSession.Interfaces
 {
     [Serializable]
     public class SessionKeyItem
     {
-        public SessionKeyItem(string key, string value, SessionKeyItemId id = null)
+        public SessionKeyItem(string key, byte[] value, SessionKeyItemId id = null)
         {
             Id = id ?? new SessionKeyItemId();
             Key = key;
@@ -19,11 +19,12 @@ namespace Microsoft.Extensions.Caching.ServiceFabric.SessionKeys.Interfaces
 
         public SessionKeyItemId Id { get; }
         public string Key { get; }
-        public string Value { get; }
+        public byte[] Value { get; }
 
         public override string ToString()
         {
-            return $"Session Key: {Key} with Value: {Value} at: {DateTime.UtcNow}";
+            return string.Empty;
+            //return $"Session Key: {Key} with Value: {Value} at: {DateTime.UtcNow}";
         }
 
         public ServicePartitionKey GetPartitionKey()

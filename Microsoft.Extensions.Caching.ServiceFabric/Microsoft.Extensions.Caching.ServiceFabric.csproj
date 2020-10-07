@@ -2,6 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.0</TargetFramework>
+    <Platforms>AnyCPU;x64</Platforms>
   </PropertyGroup>
 
   <ItemGroup>
@@ -13,12 +14,6 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.DataProtection" Version="3.1.0" />
     <PackageReference Include="Microsoft.Extensions.Caching.Abstractions" Version="3.1.0" />
-    <PackageReference Include="Microsoft.ServiceFabric.Actors" Version="4.0.457" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Include="Microsoft.ServiceFabric.Actors" Version="4.0.457" />
-
   </ItemGroup>
 
   <ItemGroup>
