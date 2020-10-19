@@ -44,6 +44,11 @@ namespace Microsoft.Extensions.Caching.ServiceFabric
             return null;
         }
 
+        /// <summary>
+        /// We need to fix here some point related to the id as id or id as GetPartitionKey()
+        /// </summary>
+        /// <param name="element"></param>
+        /// <param name="friendlyName"></param>
         public void StoreElement(XElement element, string friendlyName)
         {
             try
