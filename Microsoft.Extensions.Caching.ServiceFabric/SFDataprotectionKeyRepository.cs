@@ -44,6 +44,11 @@ namespace Microsoft.Extensions.Caching.ServiceFabric
             return null;
         }
 
+        /// <summary>
+        /// Need to optimize this part to deal with auto ids
+        /// </summary>
+        /// <param name="element"></param>
+        /// <param name="friendlyName"></param>
         public void StoreElement(XElement element, string friendlyName)
         {
             try
