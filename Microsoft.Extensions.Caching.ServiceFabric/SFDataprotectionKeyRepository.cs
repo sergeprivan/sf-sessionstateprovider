@@ -46,6 +46,7 @@ namespace Microsoft.Extensions.Caching.ServiceFabric
 
         /// <summary>
         /// We need to fix here some point related to the id as id or id as GetPartitionKey()
+        /// Need to optimize this part to deal with auto ids
         /// </summary>
         /// <param name="element"></param>
         /// <param name="friendlyName"></param>
