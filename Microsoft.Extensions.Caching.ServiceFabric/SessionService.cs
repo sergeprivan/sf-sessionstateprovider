@@ -15,7 +15,7 @@ namespace Microsoft.Extensions.Caching.ServiceFabric
     {
         // TODO share FabricClient for better performance https://stackoverflow.com/questions/37774965/how-to-enumerate-all-partitions-and-aggregate-results
         static FabricClient _fabricClient = new FabricClient();
-        static Uri _keyServiceUri = new ServiceUriBuilder("Microsoft.Extensions.Caching.ServiceFabric.SessionKeys.ProtectionKeys").ToUri();
+        static Uri _keyServiceUri = new ServiceUriBuilder("Microsoft.Extensions.Caching.ServiceFabric.UserSessionService").ToUri();
 
 
         public SessionService()
@@ -28,7 +28,7 @@ namespace Microsoft.Extensions.Caching.ServiceFabric
             {
                 var sessionActor = GetSessionServiceByUserSessionId(userSessionId);
 
-                var sessionKeyItem = new SessionKeyItem(key, value);
+                var sessionKeyItem = new SessionKeyItem(key, value, new SessionKeyItemId(userSessionId));
 
                 await sessionActor?.SetSessionItem(sessionKeyItem, CancellationToken.None);
             }
@@ -46,7 +46,7 @@ namespace Microsoft.Extensions.Caching.ServiceFabric
                 
                 var sessionItemValue = await sessionActor?.GetSessionItem(new SessionKeyItemId(userSessionId), CancellationToken.None);
                 
-                return sessionItemValue.Value;
+                return sessionItemValue?.Value;
             }
             catch (Exception ex)
             {
