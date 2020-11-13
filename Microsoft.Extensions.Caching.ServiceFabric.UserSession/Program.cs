@@ -16,6 +16,7 @@ namespace Microsoft.Extensions.Caching.ServiceFabric.UserSession
         {
             try
             {
+                // test
                 // This line registers an Actor Service to host your actor class with the Service Fabric runtime.
                 // The contents of your ServiceManifest.xml and ApplicationManifest.xml files
                 // are automatically populated when you build this project.
