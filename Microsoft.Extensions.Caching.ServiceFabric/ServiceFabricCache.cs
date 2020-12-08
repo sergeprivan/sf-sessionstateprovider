@@ -9,8 +9,8 @@ namespace Microsoft.Extensions.Caching.ServiceFabric
 {
     public class ServiceFabricCache : IDistributedCache
     {
-        private string _tableName = "ASP.NET_SessionState";
-        private string _ttlfield = "TTL";
+        //private string _tableName = "ASP.NET_SessionState";
+        //private string _ttlfield = "TTL";
         private int _sessionMinutes = 20;
         private enum ExpiryType
         {
@@ -56,12 +56,12 @@ namespace Microsoft.Extensions.Caching.ServiceFabric
 
         public void Remove(string key)
         {
-            //_table.DeleteItemAsync(key).Wait();
+            SessionService.RemoveSessionItem(key, key).Wait();
         }
 
         public async Task RemoveAsync(string key, CancellationToken token = default(CancellationToken))
         {
-            //await _table.DeleteItemAsync(key);
+            await SessionService.RemoveSessionItem(key, key);
         }
 
         public void Set(string key, byte[] value, DistributedCacheEntryOptions options)

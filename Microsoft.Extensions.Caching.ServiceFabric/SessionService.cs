@@ -1,25 +1,36 @@
-﻿using Microsoft.ServiceFabric.Actors;
-using Microsoft.ServiceFabric.Actors.Client;
-using Microsoft.Extensions.Caching.ServiceFabric.UserSession.Interfaces;
+﻿using Microsoft.Extensions.Caching.ServiceFabric.UserSession.Interfaces;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Fabric;
+using System.Fabric.Query;
+using System.Collections.Generic;
+using Microsoft.ServiceFabric.Services.Client;
+using Microsoft.ServiceFabric.Services.Remoting.Client;
+using System.Runtime.InteropServices.WindowsRuntime;
 
 namespace Microsoft.Extensions.Caching.ServiceFabric
 {
     public class SessionService : ISessionService
     {
+        // TODO share FabricClient for better performance https://stackoverflow.com/questions/37774965/how-to-enumerate-all-partitions-and-aggregate-results
+        static FabricClient _fabricClient = new FabricClient();
+        static Uri _keyServiceUri = new ServiceUriBuilder("Microsoft.Extensions.Caching.ServiceFabric.UserSessionService").ToUri();
+
+
         public SessionService()
         {
-            UserSessionUriBuilder = new ServiceUriBuilder("UserSessionActorService");
         }
 
         public async Task AddSessionItem(string userSessionId, string key, byte[] value)
         {
             try
             {
-                var sessionActor = GetSessionActor(userSessionId);
-                await sessionActor?.SetSessionItem(key, value, CancellationToken.None);
+                var sessionActor = GetSessionServiceByUserSessionId(userSessionId);
+
+                var sessionKeyItem = new SessionKeyItem(key, value, new SessionKeyItemId(userSessionId));
+
+                await sessionActor?.SetSessionItem(sessionKeyItem, CancellationToken.None);
             }
             catch (Exception ex)
             {
@@ -31,13 +42,11 @@ namespace Microsoft.Extensions.Caching.ServiceFabric
         {
             try
             {
-                var sessionActor = GetSessionActor(userSessionId);
-                var sessionItemValue = await sessionActor?.GetSessionItem(key, CancellationToken.None);
-                if (sessionItemValue == null)
-                {
-                    return null;
-                }
-                return sessionItemValue;
+                var sessionActor = GetSessionServiceByUserSessionId(userSessionId);
+                
+                var sessionItemValue = await sessionActor?.GetSessionItem(new SessionKeyItemId(userSessionId), CancellationToken.None);
+                
+                return sessionItemValue?.Value;
             }
             catch (Exception ex)
             {
@@ -46,18 +55,33 @@ namespace Microsoft.Extensions.Caching.ServiceFabric
             return null;
         }
 
-        public IUserSession GetSessionActor(string userSessionId)
+        public async Task RemoveSessionItem(string userSessionId, string key)
         {
-
-            if (string.IsNullOrEmpty(userSessionId))
+            try
             {
-                return null;
+                var sessionActor = GetSessionServiceByUserSessionId(userSessionId);
+                await sessionActor?.RemoveSessionItem(new SessionKeyItemId(userSessionId), CancellationToken.None);
             }
-            var actorId = new ActorId(userSessionId);
-            return ActorProxy.Create<IUserSession>(actorId, UserSessionUriBuilder.ToUri());
+            catch (Exception ex)
+            {
+                ServiceEventSource.Current.Message($"Method {nameof(SessionService)}->RemoveSessionItem<T>() failed with error: {ex.ToString()} at: {DateTime.UtcNow}");
+            }
         }
 
+        public IUserSessionService GetSessionServiceByUserSessionId(string userSessionId)
+        {
+            try
+            {
+                var userSessionService = ServiceProxy.Create<IUserSessionService>(_keyServiceUri, new SessionKeyItemId(userSessionId).GetPartitionKey());
+                return userSessionService;
+            }
+            catch (Exception ex)
+            {
+                ServiceEventSource.Current.Message($"{nameof(ServiceFabricDataProtectionRepository)}->StoreElement() failed to save Data Protection Keys with error: {ex.ToString()}");
+            }
 
-        ServiceUriBuilder UserSessionUriBuilder { get; }
+            return null;
+        }             
+
     }
 }
