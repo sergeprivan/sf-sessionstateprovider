@@ -3,11 +3,7 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Fabric;
-using System.Fabric.Query;
-using System.Collections.Generic;
-using Microsoft.ServiceFabric.Services.Client;
 using Microsoft.ServiceFabric.Services.Remoting.Client;
-using System.Runtime.InteropServices.WindowsRuntime;
 
 namespace Microsoft.Extensions.Caching.ServiceFabric
 {
@@ -26,11 +22,16 @@ namespace Microsoft.Extensions.Caching.ServiceFabric
         {
             try
             {
-                var sessionActor = GetSessionServiceByUserSessionId(userSessionId);
+                //
+                // In fact we are doing here a request to get a needed service based on partion key generated from userSessionId and
+                // on next step we will need to get an item with userSessionId, this looks as not nessesary query but we have a different service for the differnt data ( sharding )
+                //
+
+                var serSessionService = GetSessionServiceByUserSessionId(userSessionId);
 
                 var sessionKeyItem = new SessionKeyItem(key, value);
 
-                await sessionActor?.SetSessionItem(sessionKeyItem, CancellationToken.None);
+                await serSessionService?.SetSessionItem(sessionKeyItem, CancellationToken.None);
             }
             catch (Exception ex)
             {
@@ -42,9 +43,13 @@ namespace Microsoft.Extensions.Caching.ServiceFabric
         {
             try
             {
-                var sessionActor = GetSessionServiceByUserSessionId(userSessionId);
+                //
+                // In fact we are doing here a request to get a needed service based on partion key generated from userSessionId and
+                // on next step we will need to get an item with userSessionId, this looks as not nessesary query but we have a different service for the differnt data ( sharding )
+                //
+                var serSessionService = GetSessionServiceByUserSessionId(userSessionId);
                 
-                var sessionItemValue = await sessionActor?.GetSessionItem(new SessionKeyItemId(userSessionId), CancellationToken.None);
+                var sessionItemValue = await serSessionService?.GetSessionItem(new SessionKeyItemId(userSessionId), CancellationToken.None);
                 
                 return sessionItemValue.Value;
             }
@@ -52,6 +57,7 @@ namespace Microsoft.Extensions.Caching.ServiceFabric
             {
                 ServiceEventSource.Current.Message($"Method {nameof(SessionService)}->GetSessionItem<T>() failed with error: {ex.ToString()} at: {DateTime.UtcNow}");
             }
+            
             return null;
         }
 
@@ -59,8 +65,14 @@ namespace Microsoft.Extensions.Caching.ServiceFabric
         {
             try
             {
-                var sessionActor = GetSessionServiceByUserSessionId(userSessionId);
-                await sessionActor?.RemoveSessionItem(new SessionKeyItemId(userSessionId), CancellationToken.None);
+                //
+                // In fact we are doing here a request to get a needed service based on partion key generated from userSessionId and
+                // on next step we will need to get an item with userSessionId, this looks as not nessesary query but we have a different service for the differnt data ( sharding )
+                //
+
+                var userSessionService = GetSessionServiceByUserSessionId(userSessionId);
+
+                await userSessionService?.RemoveSessionItem(new SessionKeyItemId(userSessionId), CancellationToken.None);
             }
             catch (Exception ex)
             {
