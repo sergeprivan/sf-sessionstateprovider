@@ -11,25 +11,17 @@ using Microsoft.ServiceFabric.Data;
 using Microsoft.Extensions.Caching.ServiceFabric.UserSession.Interfaces;
 using System.Fabric;
 
-
-
-//TODO: remove actros and replace it with RC because same user can access session from different threads.
-
 namespace Microsoft.Extensions.Caching.ServiceFabric.UserSession
 {
     /// <remarks>
-    /// This class represents an actor.
-    /// Every ActorID maps to an instance of this class.
-    /// The StatePersistence attribute determines persistence and replication of actor state:
-    ///  - Persisted: State is written to disk and replicated.
-    ///  - Volatile: State is kept in memory only and replicated.
-    ///  - None: State is kept in memory only and not replicated. ?
+    /// This class represents and user session service for dealing with session data
     /// </remarks>
     internal class UserSessionService : StatefulService, IUserSessionService
     {
+        private const string SessionKeyDictionaryName = "Microsoft.Extensions.Caching.ServiceFabric.UserSession.UserSessionService.Data";
+
         public async Task<SessionKeyItem> GetSessionItem(SessionKeyItemId sessionKeyItemId, CancellationToken cancellationToken)
         {
-
             var sessionKeyItems = await StateManager.GetOrAddAsync<IReliableDictionary<SessionKeyItemId, SessionKeyItem>>(SessionKeyDictionaryName);
 
             ServiceEventSource.Current.Message($"Method started {nameof(UserSessionService)}->GetSessionItem() at: {DateTime.UtcNow}");
@@ -68,7 +60,6 @@ namespace Microsoft.Extensions.Caching.ServiceFabric.UserSession
             ServiceEventSource.Current.Message($"Method ended {nameof(UserSessionService)}->SetSessionItem() at: {DateTime.UtcNow}");
         }
 
-        private const string SessionKeyDictionaryName = "Microsoft.Extensions.Caching.ServiceFabric.SessionKeys.ProtectionKeys";
 
         public UserSessionService(StatefulServiceContext serviceContext)
             : this(serviceContext, new ReliableStateManager(serviceContext))
