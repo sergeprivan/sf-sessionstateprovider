@@ -20,12 +20,12 @@ namespace Microsoft.Extensions.Caching.ServiceFabric.UserSession
     {
         private const string SessionKeyDictionaryName = "Microsoft.Extensions.Caching.ServiceFabric.UserSession.UserSessionService.Data";
 
-        public async Task<SessionKeyItem> GetSessionItem(SessionKeyItemId sessionKeyItemId, CancellationToken cancellationToken)
+        public async Task<UserSessionItem> GetSessionItem(UserSessionItemId sessionKeyItemId, CancellationToken cancellationToken)
         {
-            var sessionKeyItems = await StateManager.GetOrAddAsync<IReliableDictionary<SessionKeyItemId, SessionKeyItem>>(SessionKeyDictionaryName);
+            var sessionKeyItems = await StateManager.GetOrAddAsync<IReliableDictionary<UserSessionItemId, UserSessionItem>>(SessionKeyDictionaryName);
 
             ServiceEventSource.Current.Message($"Method started {nameof(UserSessionService)}->GetSessionItem() at: {DateTime.UtcNow}");
-            SessionKeyItem result = null;
+            UserSessionItem result = null;
 
             using (var tx = StateManager.CreateTransaction())
             {
@@ -42,14 +42,14 @@ namespace Microsoft.Extensions.Caching.ServiceFabric.UserSession
             ServiceEventSource.Current.Message($"Method ended {nameof(UserSessionService)}->GetSessionItem() at: {DateTime.UtcNow}");
             return result;
         }
-        public Task RemoveSessionItem(SessionKeyItemId sessionKeyItemId, CancellationToken cancellationToken) 
+        public Task RemoveSessionItem(UserSessionItemId sessionKeyItemId, CancellationToken cancellationToken) 
         {
             return null; 
         }
 
-        public async Task SetSessionItem(SessionKeyItem sessionKeyItem, CancellationToken cancellationToken)
+        public async Task SetSessionItem(UserSessionItem sessionKeyItem, CancellationToken cancellationToken)
         {
-            var sessionKeyItems = await StateManager.GetOrAddAsync<IReliableDictionary<SessionKeyItemId, SessionKeyItem>>(SessionKeyDictionaryName);
+            var sessionKeyItems = await StateManager.GetOrAddAsync<IReliableDictionary<UserSessionItemId, UserSessionItem>>(SessionKeyDictionaryName);
 
             ServiceEventSource.Current.Message($"Method started {nameof(UserSessionService)}->SetSessionItem() at: {DateTime.UtcNow}");
             using (var tx = StateManager.CreateTransaction())

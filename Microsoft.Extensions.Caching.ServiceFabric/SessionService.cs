@@ -29,7 +29,7 @@ namespace Microsoft.Extensions.Caching.ServiceFabric
 
                 var serSessionService = GetSessionServiceByUserSessionId(userSessionId);
 
-                var sessionKeyItem = new SessionKeyItem(key, value);
+                var sessionKeyItem = new UserSessionItem(key, value);
 
                 await serSessionService?.SetSessionItem(sessionKeyItem, CancellationToken.None);
             }
@@ -49,7 +49,7 @@ namespace Microsoft.Extensions.Caching.ServiceFabric
                 //
                 var serSessionService = GetSessionServiceByUserSessionId(userSessionId);
                 
-                var sessionItemValue = await serSessionService?.GetSessionItem(new SessionKeyItemId(userSessionId), CancellationToken.None);
+                var sessionItemValue = await serSessionService?.GetSessionItem(new UserSessionItemId(userSessionId), CancellationToken.None);
                 
                 return sessionItemValue.Value;
             }
@@ -72,7 +72,7 @@ namespace Microsoft.Extensions.Caching.ServiceFabric
 
                 var userSessionService = GetSessionServiceByUserSessionId(userSessionId);
 
-                await userSessionService?.RemoveSessionItem(new SessionKeyItemId(userSessionId), CancellationToken.None);
+                await userSessionService?.RemoveSessionItem(new UserSessionItemId(userSessionId), CancellationToken.None);
             }
             catch (Exception ex)
             {
@@ -84,7 +84,7 @@ namespace Microsoft.Extensions.Caching.ServiceFabric
         {
             try
             {
-                var userSessionService = ServiceProxy.Create<IUserSessionService>(_keyServiceUri, new SessionKeyItemId(userSessionId).GetPartitionKey());
+                var userSessionService = ServiceProxy.Create<IUserSessionService>(_keyServiceUri, new UserSessionItemId(userSessionId).GetPartitionKey());
                 return userSessionService;
             }
             catch (Exception ex)

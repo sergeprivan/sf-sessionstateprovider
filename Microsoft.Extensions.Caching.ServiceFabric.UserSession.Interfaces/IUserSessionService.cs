@@ -9,8 +9,8 @@ namespace Microsoft.Extensions.Caching.ServiceFabric.UserSession.Interfaces
     /// </summary>
     public interface IUserSessionService : IService
     {
-        Task<SessionKeyItem> GetSessionItem(SessionKeyItemId sessionKeyItemId, CancellationToken cancellationToken);
-        Task SetSessionItem(SessionKeyItem sessionKeyItem, CancellationToken cancellationToken);
-        Task RemoveSessionItem(SessionKeyItemId sessionKeyItemId, CancellationToken cancellationToken);
+        Task<UserSessionItem> GetSessionItem(UserSessionItemId sessionKeyItemId, CancellationToken cancellationToken);
+        Task SetSessionItem(UserSessionItem sessionKeyItem, CancellationToken cancellationToken);
+        Task RemoveSessionItem(UserSessionItemId sessionKeyItemId, CancellationToken cancellationToken);
     }
 }
