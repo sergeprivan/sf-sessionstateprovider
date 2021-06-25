@@ -7,12 +7,12 @@ namespace Microsoft.Extensions.DependencyInjection
     public static class ServiceFabricCacheServiceCollectionExtensions
     {
         /// <summary>
-        /// Adds Amazon DynamoDB caching services to the specified <see cref="IServiceCollection" />.
+        /// Adds Service Fabric reliable collection <see cref="IServiceCollection" />.
         /// </summary>
         /// <param name="services">The <see cref="IServiceCollection" /> to add services to.</param>
         /// <param name="setupAction">An <see cref="Action{DynamoDbCacheOptions}"/> to configure the provided
         /// <see cref="ServiceFabricCacheOptions"/>.</param>
-        /// <returns>The <see cref="IServiceCollection"/> so that additional calls can be chained.</returns>
+        /// <returns>The <see cref="IServiceCollection"/> so that additional calls can be chained.</returns>                    
         public static IServiceCollection AddDistributedServiceFabricCache(this IServiceCollection services, Action<ServiceFabricCacheOptions> setupAction)
         {
             if (services == null)
