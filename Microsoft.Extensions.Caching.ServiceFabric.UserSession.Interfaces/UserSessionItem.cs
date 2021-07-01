@@ -19,7 +19,7 @@ namespace Microsoft.Extensions.Caching.ServiceFabric.UserSession.Interfaces
 
         public UserSessionItemId Id { get; }
         public string Key { get; }
-        public byte[] Value { get; set; }
+        public byte[] Value { get; }
 
         public DateTime CreateDate { get; set; }
         public string ExpiryType { get; set; }
