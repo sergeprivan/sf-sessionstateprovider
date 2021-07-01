@@ -36,30 +36,7 @@ namespace Microsoft.Extensions.Caching.ServiceFabric
                 ServiceEventSource.Current.Message($"Method {nameof(SessionService)}->AddSessionItem<T>() failed with error: {ex.ToString()} at: {DateTime.UtcNow}");
             }
         }
-
-
-
-        //public async Task<byte[]> GetSessionItem(string userSessionId, string key)
-        //{
-        //    try
-        //    {
-        //        //
-        //        // In fact we are doing here a request to get a needed service based on partion key generated from userSessionId and
-        //        // on next step we will need to get an item with userSessionId, this looks as not nessesary query but we have a different service for the differnt data ( sharding )
-        //        //
-        //        var serSessionService = GetSessionServiceByUserSessionId(userSessionId);
-
-        //        var sessionItemValue = await serSessionService?.GetSessionItem(new UserSessionItemId(userSessionId), CancellationToken.None);
-
-        //        return sessionItemValue.Value;
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        ServiceEventSource.Current.Message($"Method {nameof(SessionService)}->GetSessionItem<T>() failed with error: {ex.ToString()} at: {DateTime.UtcNow}");
-        //    }
-
-        //    return null;
-        //}
+                             
 
         public async Task<UserSessionItem> GetSessionItem(string userSessionId, string key)
         {
