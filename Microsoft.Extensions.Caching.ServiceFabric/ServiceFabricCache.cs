@@ -3,6 +3,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Caching.Distributed;
+using Microsoft.Extensions.Caching.ServiceFabric.UserSession.Interfaces;
 using Microsoft.Extensions.Options;
 
 namespace Microsoft.Extensions.Caching.ServiceFabric
@@ -33,7 +34,7 @@ namespace Microsoft.Extensions.Caching.ServiceFabric
         public async Task<byte[]> GetAsync(string key, CancellationToken token = default(CancellationToken))
         {
             var result = await SessionService.GetSessionItem(key, key);
-            return result;
+            return result.Value;
         }
 
         public void Refresh(string key)
@@ -56,12 +57,13 @@ namespace Microsoft.Extensions.Caching.ServiceFabric
 
         public void Remove(string key)
         {
-            SessionService.RemoveSessionItem(key, key).Wait();
+            RemoveAsync(key).Wait();
         }
 
         public async Task RemoveAsync(string key, CancellationToken token = default(CancellationToken))
         {
-            await SessionService.RemoveSessionItem(key, key);
+            var sessionItem = await SessionService.GetSessionItem(key, key);
+            await SessionService.RemoveSessionItem(key, sessionItem);
         }
 
         public void Set(string key, byte[] value, DistributedCacheEntryOptions options)
@@ -71,7 +73,8 @@ namespace Microsoft.Extensions.Caching.ServiceFabric
 
         public async Task SetAsync(string key, byte[] value, DistributedCacheEntryOptions options, CancellationToken token = default(CancellationToken))
         {
-            await SessionService.AddSessionItem(key, key, value);
+            var sessionItem = new UserSessionItem(key, value);
+            await SessionService.AddSessionItem(key, sessionItem);
             //ExpiryType expiryType;
             //var epoctime = GetEpochExpiry(options, out expiryType);
             //var _ssdoc = new Document();

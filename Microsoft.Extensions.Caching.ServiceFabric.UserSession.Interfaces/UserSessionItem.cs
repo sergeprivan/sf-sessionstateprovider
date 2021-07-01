@@ -21,6 +21,10 @@ namespace Microsoft.Extensions.Caching.ServiceFabric.UserSession.Interfaces
         public string Key { get; }
         public byte[] Value { get; }
 
+        public DateTime CreateDate { get; }
+        public string ExpiryType { get; }
+        public int Epoctime { get; }
+        public int Ttl { get; }
         public override string ToString()
         {
             return $"Session Key: {Key} with Value: {Value} at: {DateTime.UtcNow}";
