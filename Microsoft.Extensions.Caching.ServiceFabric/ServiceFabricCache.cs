@@ -74,7 +74,7 @@ namespace Microsoft.Extensions.Caching.ServiceFabric
         {
             var sessionItem = new UserSessionItem(key, value);
 
-            sessionItem.CreateDate = DateTime.Now.ToUniversalTime();
+            sessionItem.CreateDate = DateTime.UtcNow;
             ExpiryType expiryType;
             var epoctime = GetEpochExpiry(options, out expiryType);
             sessionItem.Epoctime = epoctime;

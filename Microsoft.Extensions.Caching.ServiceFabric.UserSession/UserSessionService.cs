@@ -33,7 +33,7 @@ namespace Microsoft.Extensions.Caching.ServiceFabric.UserSession
                 while (await enumerator.MoveNextAsync(cancellationToken))
                 {
                     if (enumerator.Current.Key == sessionKeyItemId)
-                    { 
+                    {
                         result = enumerator.Current.Value;
                         break;
                     }
@@ -42,9 +42,12 @@ namespace Microsoft.Extensions.Caching.ServiceFabric.UserSession
             ServiceEventSource.Current.Message($"Method ended {nameof(UserSessionService)}->GetSessionItem() at: {DateTime.UtcNow}");
             return result;
         }
-        public Task RemoveSessionItem(UserSessionItemId sessionKeyItemId, CancellationToken cancellationToken) 
+
+        public Task RemoveSessionItem(UserSessionItemId sessionKeyItemId, CancellationToken cancellationToken)
         {
-            return null; 
+            // For now I am removing data via run async, but this one also need to be implemented if user wants to delete the session explicitly 
+
+            return null;
         }
 
         public async Task SetSessionItem(UserSessionItem sessionKeyItem, CancellationToken cancellationToken)
@@ -61,6 +64,7 @@ namespace Microsoft.Extensions.Caching.ServiceFabric.UserSession
         }
 
 
+
         public UserSessionService(StatefulServiceContext serviceContext)
             : this(serviceContext, new ReliableStateManager(serviceContext))
         {
@@ -69,10 +73,43 @@ namespace Microsoft.Extensions.Caching.ServiceFabric.UserSession
             : base(context, stateManagerreplica)
         {
         }
-                       
+
         protected override IEnumerable<ServiceReplicaListener> CreateServiceReplicaListeners()
         {
             return this.CreateServiceRemotingReplicaListeners();
         }
+
+        protected override async Task RunAsync(CancellationToken cancellationToken)
+        {
+            // We are going to loop to remove old session data            
+
+            var sessionKeyItems = await StateManager.GetOrAddAsync<IReliableDictionary<UserSessionItemId, UserSessionItem>>(SessionKeyDictionaryName);
+
+            while (true)
+            {
+                cancellationToken.ThrowIfCancellationRequested();
+
+                using (var tx = this.StateManager.CreateTransaction())
+                {
+                    var now = DateTimeOffset.Now.ToUniversalTime().ToUnixTimeSeconds();
+                    var enumerator = (await sessionKeyItems.CreateEnumerableAsync(tx)).GetAsyncEnumerator();
+                    while (await enumerator.MoveNextAsync(cancellationToken))
+                    {
+                        var userSessionItem = enumerator.Current.Value;
+                        var userSessionItemId = enumerator.Current.Key;
+
+                        if (userSessionItem.Ttl < now)
+                        {
+                            await sessionKeyItems.TryRemoveAsync(tx, userSessionItemId);
+                        }
+                    }
+
+                    await tx.CommitAsync();
+                }
+
+                await Task.Delay(TimeSpan.FromMinutes(1), cancellationToken);
+            }
+        }
+
     }
 }
