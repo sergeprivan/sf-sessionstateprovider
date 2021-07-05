@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ServiceManifest xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Name="Microsoft.Extensions.Caching.ServiceFabric.UserSessionPkg" Version="1.0.0" xmlns="http://schemas.microsoft.com/2011/01/fabric">
-  <ServiceTypes>
+  <ServiceTypes>    
     <StatefulServiceType ServiceTypeName="Microsoft.Extensions.Caching.ServiceFabric.UserSessionServiceType" HasPersistedState="true">
       <Extensions>
         <Extension Name="__GeneratedServiceType__" GeneratedId="9ea82191-785a-43fa-a3f2-ea1ce941f8c1|Persisted">

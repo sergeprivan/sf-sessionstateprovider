@@ -7,9 +7,9 @@
     <Parameter Name="Web1_ASPNETCORE_ENVIRONMENT" DefaultValue="" />
     <Parameter Name="Web1_InstanceCount" DefaultValue="-1" />
     <Parameter Name="SFContacts.UI_InstanceCount" DefaultValue="-1" />
-    <Parameter Name="UserSessionActorService_PartitionCount" DefaultValue="10" />
-    <Parameter Name="UserSessionActorService_MinReplicaSetSize" DefaultValue="3" />
-    <Parameter Name="UserSessionActorService_TargetReplicaSetSize" DefaultValue="3" />
+    <Parameter Name="UserSessionService_PartitionCount" DefaultValue="10" />
+    <Parameter Name="UserSessionService_MinReplicaSetSize" DefaultValue="3" />
+    <Parameter Name="UserSessionService_TargetReplicaSetSize" DefaultValue="3" />
   </Parameters>
   <!-- Import the ServiceManifest from the ServicePackage. The ServiceManifestName and ServiceManifestVersion 
        should match the Name and Version attributes of the ServiceManifest element defined in the 
