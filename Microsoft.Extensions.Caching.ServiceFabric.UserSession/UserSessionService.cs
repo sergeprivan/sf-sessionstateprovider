@@ -11,29 +11,21 @@ using Microsoft.ServiceFabric.Data;
 using Microsoft.Extensions.Caching.ServiceFabric.UserSession.Interfaces;
 using System.Fabric;
 
-
-
-//TODO: remove actros and replace it with RC because same user can access session from different threads.
-
 namespace Microsoft.Extensions.Caching.ServiceFabric.UserSession
 {
     /// <remarks>
-    /// This class represents an actor.
-    /// Every ActorID maps to an instance of this class.
-    /// The StatePersistence attribute determines persistence and replication of actor state:
-    ///  - Persisted: State is written to disk and replicated.
-    ///  - Volatile: State is kept in memory only and replicated.
-    ///  - None: State is kept in memory only and not replicated. ?
+    /// This class represents and user session service for dealing with session data
     /// </remarks>
     internal class UserSessionService : StatefulService, IUserSessionService
     {
-        public async Task<SessionKeyItem> GetSessionItem(SessionKeyItemId sessionKeyItemId, CancellationToken cancellationToken)
-        {
+        private const string SessionKeyDictionaryName = "Microsoft.Extensions.Caching.ServiceFabric.UserSession.UserSessionService.Data";
 
-            var sessionKeyItems = await StateManager.GetOrAddAsync<IReliableDictionary<SessionKeyItemId, SessionKeyItem>>(SessionKeyDictionaryName);
+        public async Task<UserSessionItem> GetSessionItem(UserSessionItemId sessionKeyItemId, CancellationToken cancellationToken)
+        {
+            var sessionKeyItems = await StateManager.GetOrAddAsync<IReliableDictionary<UserSessionItemId, UserSessionItem>>(SessionKeyDictionaryName);
 
             ServiceEventSource.Current.Message($"Method started {nameof(UserSessionService)}->GetSessionItem() at: {DateTime.UtcNow}");
-            SessionKeyItem result = null;
+            UserSessionItem result = null;
 
             using (var tx = StateManager.CreateTransaction())
             {
@@ -41,7 +33,7 @@ namespace Microsoft.Extensions.Caching.ServiceFabric.UserSession
                 while (await enumerator.MoveNextAsync(cancellationToken))
                 {
                     if (enumerator.Current.Key == sessionKeyItemId)
-                    { 
+                    {
                         result = enumerator.Current.Value;
                         break;
                     }
@@ -50,14 +42,17 @@ namespace Microsoft.Extensions.Caching.ServiceFabric.UserSession
             ServiceEventSource.Current.Message($"Method ended {nameof(UserSessionService)}->GetSessionItem() at: {DateTime.UtcNow}");
             return result;
         }
-        public Task RemoveSessionItem(SessionKeyItemId sessionKeyItemId, CancellationToken cancellationToken) 
+
+        public Task RemoveSessionItem(UserSessionItemId sessionKeyItemId, CancellationToken cancellationToken)
         {
-            return null; 
+            // For now I am removing data via run async, but this one also need to be implemented if user wants to delete the session explicitly 
+
+            return null;
         }
 
-        public async Task SetSessionItem(SessionKeyItem sessionKeyItem, CancellationToken cancellationToken)
+        public async Task SetSessionItem(UserSessionItem sessionKeyItem, CancellationToken cancellationToken)
         {
-            var sessionKeyItems = await StateManager.GetOrAddAsync<IReliableDictionary<SessionKeyItemId, SessionKeyItem>>(SessionKeyDictionaryName);
+            var sessionKeyItems = await StateManager.GetOrAddAsync<IReliableDictionary<UserSessionItemId, UserSessionItem>>(SessionKeyDictionaryName);
 
             ServiceEventSource.Current.Message($"Method started {nameof(UserSessionService)}->SetSessionItem() at: {DateTime.UtcNow}");
             using (var tx = StateManager.CreateTransaction())
@@ -68,8 +63,6 @@ namespace Microsoft.Extensions.Caching.ServiceFabric.UserSession
             ServiceEventSource.Current.Message($"Method ended {nameof(UserSessionService)}->SetSessionItem() at: {DateTime.UtcNow}");
         }
 
-        private const string SessionKeyDictionaryName = "Microsoft.Extensions.Caching.ServiceFabric.SessionKeys.ProtectionKeys";
-
         public UserSessionService(StatefulServiceContext serviceContext)
             : this(serviceContext, new ReliableStateManager(serviceContext))
         {
@@ -78,10 +71,43 @@ namespace Microsoft.Extensions.Caching.ServiceFabric.UserSession
             : base(context, stateManagerreplica)
         {
         }
-                       
+
         protected override IEnumerable<ServiceReplicaListener> CreateServiceReplicaListeners()
         {
             return this.CreateServiceRemotingReplicaListeners();
         }
+
+        protected override async Task RunAsync(CancellationToken cancellationToken)
+        {
+            // We are going to loop to remove old session data            
+
+            var sessionKeyItems = await StateManager.GetOrAddAsync<IReliableDictionary<UserSessionItemId, UserSessionItem>>(SessionKeyDictionaryName);
+
+            while (true)
+            {
+                cancellationToken.ThrowIfCancellationRequested();
+
+                using (var tx = this.StateManager.CreateTransaction())
+                {
+                    var now = DateTimeOffset.Now.ToUniversalTime().ToUnixTimeSeconds();
+                    var enumerator = (await sessionKeyItems.CreateEnumerableAsync(tx)).GetAsyncEnumerator();
+                    while (await enumerator.MoveNextAsync(cancellationToken))
+                    {
+                        var userSessionItem = enumerator.Current.Value;
+                        var userSessionItemId = enumerator.Current.Key;
+
+                        if (userSessionItem.Ttl < now)
+                        {
+                            await sessionKeyItems.TryRemoveAsync(tx, userSessionItemId);
+                        }
+                    }
+
+                    await tx.CommitAsync();
+                }
+
+                await Task.Delay(TimeSpan.FromMinutes(1), cancellationToken);
+            }
+        }
+
     }
 }

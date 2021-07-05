@@ -1,16 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ServiceManifest xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Name="Microsoft.Extensions.Caching.ServiceFabric.UserSessionPkg" Version="1.0.0" xmlns="http://schemas.microsoft.com/2011/01/fabric">
-  <ServiceTypes>
-    <StatefulServiceType ServiceTypeName="UserSessionActorServiceType" HasPersistedState="true">
+  <ServiceTypes>    
+    <StatefulServiceType ServiceTypeName="Microsoft.Extensions.Caching.ServiceFabric.UserSessionServiceType" HasPersistedState="true">
       <Extensions>
         <Extension Name="__GeneratedServiceType__" GeneratedId="9ea82191-785a-43fa-a3f2-ea1ce941f8c1|Persisted">
           <GeneratedNames xmlns="http://schemas.microsoft.com/2015/03/fabact-no-schema">
-            <DefaultService Name="UserSessionActorService" />
-            <ServiceEndpoint Name="UserSessionActorServiceEndpoint" />
-            <ReplicatorEndpoint Name="UserSessionActorServiceReplicatorEndpoint" />
-            <ReplicatorConfigSection Name="UserSessionActorServiceReplicatorConfig" />
-            <ReplicatorSecurityConfigSection Name="UserSessionActorServiceReplicatorSecurityConfig" />
-            <StoreConfigSection Name="UserSessionActorServiceLocalStoreConfig" />
+            <DefaultService Name="UserSessionService" />
+            <ServiceEndpoint Name="UserSessionServiceEndpoint" />
+            <ReplicatorEndpoint Name="UserSessionServiceReplicatorEndpoint" />
+            <ReplicatorConfigSection Name="UserSessionServiceReplicatorConfig" />
+            <ReplicatorSecurityConfigSection Name="UserSessionServiceReplicatorSecurityConfig" />
+            <StoreConfigSection Name="UserSessionServiceLocalStoreConfig" />
           </GeneratedNames>
         </Extension>
       </Extensions>
@@ -26,8 +26,8 @@
   <ConfigPackage Name="Config" Version="1.0.0" />
   <Resources>
     <Endpoints>
-      <Endpoint Name="UserSessionActorServiceEndpoint" />
-      <Endpoint Name="UserSessionActorServiceReplicatorEndpoint" />
+      <Endpoint Name="UserSessionServiceEndpoint" />
+      <Endpoint Name="UserSessionServiceReplicatorEndpoint" />
     </Endpoints>
   </Resources>
   <!-- The content will be generated during build -->

@@ -7,9 +7,9 @@
     <Parameter Name="Web1_ASPNETCORE_ENVIRONMENT" DefaultValue="" />
     <Parameter Name="Web1_InstanceCount" DefaultValue="-1" />
     <Parameter Name="SFContacts.UI_InstanceCount" DefaultValue="-1" />
-    <Parameter Name="UserSessionActorService_PartitionCount" DefaultValue="10" />
-    <Parameter Name="UserSessionActorService_MinReplicaSetSize" DefaultValue="3" />
-    <Parameter Name="UserSessionActorService_TargetReplicaSetSize" DefaultValue="3" />
+    <Parameter Name="UserSessionService_PartitionCount" DefaultValue="10" />
+    <Parameter Name="UserSessionService_MinReplicaSetSize" DefaultValue="3" />
+    <Parameter Name="UserSessionService_TargetReplicaSetSize" DefaultValue="3" />
   </Parameters>
   <!-- Import the ServiceManifest from the ServicePackage. The ServiceManifestName and ServiceManifestVersion 
        should match the Name and Version attributes of the ServiceManifest element defined in the 
@@ -45,8 +45,8 @@
         <SingletonPartition />
       </StatelessService>
     </Service>
-    <Service Name="UserSessionActorService" GeneratedIdRef="9ea82191-785a-43fa-a3f2-ea1ce941f8c1|Persisted">
-      <StatefulService ServiceTypeName="UserSessionActorServiceType" TargetReplicaSetSize="[UserSessionActorService_TargetReplicaSetSize]" MinReplicaSetSize="[UserSessionActorService_MinReplicaSetSize]">
+    <Service Name="Microsoft.Extensions.Caching.ServiceFabric.UserSession">
+      <StatefulService ServiceTypeName="Microsoft.Extensions.Caching.ServiceFabric.UserSessionServiceType" TargetReplicaSetSize="[UserSessionActorService_TargetReplicaSetSize]" MinReplicaSetSize="[UserSessionActorService_MinReplicaSetSize]">
         <UniformInt64Partition PartitionCount="[UserSessionActorService_PartitionCount]" LowKey="-9223372036854775808" HighKey="9223372036854775807" />
       </StatefulService>
     </Service>

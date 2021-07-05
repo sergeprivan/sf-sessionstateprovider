@@ -3,14 +3,13 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Caching.Distributed;
+using Microsoft.Extensions.Caching.ServiceFabric.UserSession.Interfaces;
 using Microsoft.Extensions.Options;
 
 namespace Microsoft.Extensions.Caching.ServiceFabric
 {
     public class ServiceFabricCache : IDistributedCache
     {
-        //private string _tableName = "ASP.NET_SessionState";
-        //private string _ttlfield = "TTL";
         private int _sessionMinutes = 20;
         private enum ExpiryType
         {
@@ -26,11 +25,11 @@ namespace Microsoft.Extensions.Caching.ServiceFabric
 
         public byte[] Get(string key)
         {
-            var result = GetAsync(key).Result;
+            var result = GetAsync(key).GetAwaiter().GetResult();
             return result;
         }
 
-        public async Task<byte[]> GetAsync(string key, CancellationToken token = default(CancellationToken))
+        public async Task<UserSessionItem> GetAsyncItem(string key, CancellationToken token = default(CancellationToken))
         {
             var result = await SessionService.GetSessionItem(key, key);
             return result;
@@ -43,12 +42,13 @@ namespace Microsoft.Extensions.Caching.ServiceFabric
 
         public async Task RefreshAsync(string key, CancellationToken token = default(CancellationToken))
         {
-            //var value = _table.GetItemAsync(key).Result;
-            //if (value == null || value["ExpiryType"] == null || value["ExpiryType"] != "Sliding")
-            //{
-            //    return;
-            //}
-            //value[_ttlfield] = DateTimeOffset.Now.ToUniversalTime().ToUnixTimeSeconds() + (_sessionMinutes * 60);
+            var value = GetAsyncItem(key, token).Result;
+
+            if (value == null || value.ExpiryType == null || value.ExpiryType != "Sliding")
+            {
+                return;
+            }
+            value.Ttl = DateTimeOffset.Now.ToUniversalTime().ToUnixTimeSeconds() + (_sessionMinutes * 60);
 
 
             await SetAsync(key, Get(key), new DistributedCacheEntryOptions { SlidingExpiration = new TimeSpan(0, _sessionMinutes, 0) });
@@ -56,12 +56,13 @@ namespace Microsoft.Extensions.Caching.ServiceFabric
 
         public void Remove(string key)
         {
-            SessionService.RemoveSessionItem(key, key).Wait();
+            RemoveAsync(key).Wait();
         }
 
         public async Task RemoveAsync(string key, CancellationToken token = default(CancellationToken))
         {
-            await SessionService.RemoveSessionItem(key, key);
+            var sessionItem = await SessionService.GetSessionItem(key, key);
+            await SessionService.RemoveSessionItem(key, sessionItem);
         }
 
         public void Set(string key, byte[] value, DistributedCacheEntryOptions options)
@@ -71,18 +72,20 @@ namespace Microsoft.Extensions.Caching.ServiceFabric
 
         public async Task SetAsync(string key, byte[] value, DistributedCacheEntryOptions options, CancellationToken token = default(CancellationToken))
         {
-            await SessionService.AddSessionItem(key, key, value);
-            //ExpiryType expiryType;
-            //var epoctime = GetEpochExpiry(options, out expiryType);
-            //var _ssdoc = new Document();
+            var sessionItem = await SessionService.GetSessionItem(key, key);
 
-            //_ssdoc.Add("SessionId", key);
-            //_ssdoc.Add("Session", value);
-            //_ssdoc.Add("CreateDate", DateTime.Now.ToUniversalTime().ToString("o"));
-            //_ssdoc.Add("ExpiryType", expiryType.ToString());
-            //_ssdoc.Add(_ttlfield, epoctime);
+            if (sessionItem == null)
+            {
+                sessionItem = new UserSessionItem(key, value, new UserSessionItemId(key));
+            }
 
-            ////await _table.PutItemAsync(_ssdoc);
+            sessionItem.CreateDate = DateTime.UtcNow;
+            ExpiryType expiryType;
+            var epoctime = GetEpochExpiry(options, out expiryType);
+            sessionItem.Epoctime = epoctime;
+            sessionItem.ExpiryType = expiryType.ToString();
+
+            await SessionService.AddSessionItem(key, sessionItem);
         }
 
         private long GetEpochExpiry(DistributedCacheEntryOptions options, out ExpiryType expiryType)
@@ -108,6 +111,12 @@ namespace Microsoft.Extensions.Caching.ServiceFabric
             {
                 throw new Exception("Cache expiry option must be set to Sliding, Absolute or Absolute relative to now");
             }
+        }
+
+        public async Task<byte[]> GetAsync(string key, CancellationToken token = default(CancellationToken))
+        {
+            var result = await GetAsyncItem(key, token);
+            return result?.Value;
         }
     }
 }

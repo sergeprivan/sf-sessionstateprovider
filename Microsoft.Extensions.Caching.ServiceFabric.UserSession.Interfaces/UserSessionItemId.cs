@@ -8,14 +8,14 @@ using System.Threading.Tasks;
 namespace Microsoft.Extensions.Caching.ServiceFabric.UserSession.Interfaces
 {
     [Serializable]
-    public class SessionKeyItemId : IFormattable, IComparable, IComparable<SessionKeyItemId>, IEquatable<SessionKeyItemId>
+    public class UserSessionItemId : IFormattable, IComparable, IComparable<UserSessionItemId>, IEquatable<UserSessionItemId>
     {
-        public SessionKeyItemId()
+        private UserSessionItemId()
         {
             Id = Guid.NewGuid();
         }
 
-        public SessionKeyItemId(string id)
+        public UserSessionItemId(string id)
         {
             Id = Guid.Parse(id);
         }
@@ -29,15 +29,15 @@ namespace Microsoft.Extensions.Caching.ServiceFabric.UserSession.Interfaces
 
         public int CompareTo(object obj)
         {
-            return this.Id.CompareTo(((SessionKeyItemId)obj).Id);
+            return this.Id.CompareTo(((UserSessionItemId)obj).Id);
         }
 
-        public int CompareTo(SessionKeyItemId other)
+        public int CompareTo(UserSessionItemId other)
         {
             return this.Id.CompareTo(other.Id);
         }
 
-        public bool Equals(SessionKeyItemId other)
+        public bool Equals(UserSessionItemId other)
         {
             return this.Id.Equals(other.Id);
         }
@@ -52,19 +52,19 @@ namespace Microsoft.Extensions.Caching.ServiceFabric.UserSession.Interfaces
             return new ServicePartitionKey(HashUtil.GetLongHashCode(this.Id.ToString()));
         }
 
-        public static bool operator ==(SessionKeyItemId item1, SessionKeyItemId item2)
+        public static bool operator ==(UserSessionItemId item1, UserSessionItemId item2)
         {
             return item1.Equals(item2);
         }
 
-        public static bool operator !=(SessionKeyItemId item1, SessionKeyItemId item2)
+        public static bool operator !=(UserSessionItemId item1, UserSessionItemId item2)
         {
             return !item1.Equals(item2);
         }
 
         public override bool Equals(object obj)
         {
-            return (obj is SessionKeyItemId) ? this.Id.Equals(((SessionKeyItemId)obj).Id) : false;
+            return (obj is UserSessionItemId) ? this.Id.Equals(((UserSessionItemId)obj).Id) : false;
         }
 
         public override int GetHashCode()
