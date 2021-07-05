@@ -8,23 +8,26 @@ using System.Threading.Tasks;
 namespace Microsoft.Extensions.Caching.ServiceFabric.UserSession.Interfaces
 {
     [Serializable]
-    public class SessionKeyItem
+    public class UserSessionItem
     {
-        public SessionKeyItem(string key, byte[] value, SessionKeyItemId id = null)
+        public UserSessionItem(string key, byte[] value, UserSessionItemId id)
         {
-            Id = id ?? new SessionKeyItemId();
+            Id = id;
             Key = key;
             Value = value;
         }
 
-        public SessionKeyItemId Id { get; }
+        public UserSessionItemId Id { get; }
         public string Key { get; }
         public byte[] Value { get; }
 
+        public DateTime CreateDate { get; set; }
+        public string ExpiryType { get; set; }
+        public long Epoctime { get; set; }
+        public long Ttl { get; set; }
         public override string ToString()
         {
-            return string.Empty;
-            //return $"Session Key: {Key} with Value: {Value} at: {DateTime.UtcNow}";
+            return $"Session Key: {Key} with Value: {Value} at: {DateTime.UtcNow}";
         }
 
         public ServicePartitionKey GetPartitionKey()
