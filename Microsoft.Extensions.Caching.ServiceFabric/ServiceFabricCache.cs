@@ -72,7 +72,12 @@ namespace Microsoft.Extensions.Caching.ServiceFabric
 
         public async Task SetAsync(string key, byte[] value, DistributedCacheEntryOptions options, CancellationToken token = default(CancellationToken))
         {
-            var sessionItem = new UserSessionItem(key, value);
+            var sessionItem = await SessionService.GetSessionItem(key, key);
+
+            if (sessionItem == null)
+            {
+                sessionItem = new UserSessionItem(key, value);
+            }
 
             sessionItem.CreateDate = DateTime.UtcNow;
             ExpiryType expiryType;
@@ -110,7 +115,7 @@ namespace Microsoft.Extensions.Caching.ServiceFabric
 
         public async Task<byte[]> GetAsync(string key, CancellationToken token = default(CancellationToken))
         {
-            var result = await GetAsyncItem(key,token);
+            var result = await GetAsyncItem(key, token);
             return result.Value;
         }
     }
