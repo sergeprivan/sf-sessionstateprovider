@@ -20,7 +20,7 @@
                                     AzureActiveDirectory="true"
                                     ServerCertThumbprint="0123456789012345678901234567890123456789" />
   -->
-  <ClusterConnectionParameters ConnectionEndpoint="privanwestus.westus.cloudapp.azure.com:19000" X509Credential="true" ServerCertThumbprint="4EBAD1F775AB092770583FE2864627CB51F7F8E8" FindType="FindByThumbprint" FindValue="4EBAD1F775AB092770583FE2864627CB51F7F8E8" StoreLocation="CurrentUser" StoreName="My" />
+  <ClusterConnectionParameters ConnectionEndpoint="privanwestus.westus.cloudapp.azure.com:19000" X509Credential="true" FindType="FindByThumbprint" FindValue="6AF63738B4B6C2420441B7CBC2AB8A83EA91DAE6" ServerCertThumbprint="6AF63738B4B6C2420441B7CBC2AB8A83EA91DAE6" StoreLocation="CurrentUser" StoreName="My" />
   <ApplicationParameterFile Path="..\ApplicationParameters\Cloud.xml" />
 
 </PublishProfile>
