@@ -10,7 +10,7 @@ namespace Microsoft.Extensions.Caching.ServiceFabric.UserSession.Interfaces
     [Serializable]
     public class UserSessionItemId : IFormattable, IComparable, IComparable<UserSessionItemId>, IEquatable<UserSessionItemId>
     {
-        public UserSessionItemId()
+        private UserSessionItemId()
         {
             Id = Guid.NewGuid();
         }

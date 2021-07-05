@@ -10,9 +10,9 @@ namespace Microsoft.Extensions.Caching.ServiceFabric.UserSession.Interfaces
     [Serializable]
     public class UserSessionItem
     {
-        public UserSessionItem(string key, byte[] value, UserSessionItemId id = null)
+        public UserSessionItem(string key, byte[] value, UserSessionItemId id)
         {
-            Id = id ?? new UserSessionItemId();
+            Id = id;
             Key = key;
             Value = value;
         }

@@ -11,7 +11,7 @@ namespace Microsoft.Extensions.Caching.ServiceFabric
     {
         // TODO share FabricClient for better performance https://stackoverflow.com/questions/37774965/how-to-enumerate-all-partitions-and-aggregate-results
         static FabricClient _fabricClient = new FabricClient();
-        static Uri _keyServiceUri = new ServiceUriBuilder("Microsoft.Extensions.Caching.ServiceFabric.SessionKeys.ProtectionKeys").ToUri();
+        static Uri _keyServiceUri = new ServiceUriBuilder("Microsoft.Extensions.Caching.ServiceFabric.UserSession").ToUri();
 
 
         public SessionService()

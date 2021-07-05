@@ -76,7 +76,7 @@ namespace Microsoft.Extensions.Caching.ServiceFabric
 
             if (sessionItem == null)
             {
-                sessionItem = new UserSessionItem(key, value);
+                sessionItem = new UserSessionItem(key, value, new UserSessionItemId(key));
             }
 
             sessionItem.CreateDate = DateTime.UtcNow;
@@ -116,7 +116,7 @@ namespace Microsoft.Extensions.Caching.ServiceFabric
         public async Task<byte[]> GetAsync(string key, CancellationToken token = default(CancellationToken))
         {
             var result = await GetAsyncItem(key, token);
-            return result.Value;
+            return result?.Value;
         }
     }
 }
