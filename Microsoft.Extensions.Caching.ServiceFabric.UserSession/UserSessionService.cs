@@ -96,7 +96,7 @@ namespace Microsoft.Extensions.Caching.ServiceFabric.UserSession
                         var userSessionItem = enumerator.Current.Value;
                         var userSessionItemId = enumerator.Current.Key;
 
-                        if (userSessionItem.Ttl < now)
+                        if (userSessionItem.Ttl > now)
                         {
                             await sessionKeyItems.TryRemoveAsync(tx, userSessionItemId);
                         }
