@@ -24,9 +24,11 @@ namespace Microsoft.Extensions.Caching.ServiceFabric.Test
             services.AddMvc();
             services.AddControllersWithViews();
 
+            // Add these lines to connect SF cache and thats all
+
             services.AddSingleton<IXmlRepository, ServiceFabricDataProtectionRepository>();
             services.AddDataProtection().AddKeyManagementOptions(options => options.XmlRepository = new ServiceFabricDataProtectionRepository());
-            services.AddDistributedServiceFabricCache(o => { o.TableName = "test"; o.SessionService = new SessionService(); });
+            services.AddDistributedServiceFabricCache(o => { o.SessionService = new SessionService(); });
 
             services.AddSession(options =>
             {

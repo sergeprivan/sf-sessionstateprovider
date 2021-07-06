@@ -23,6 +23,9 @@ namespace Microsoft.Extensions.Caching.ServiceFabric.Test.Controllers
         {
             HttpContext.Session.LoadAsync().GetAwaiter();
 
+            //
+            // This is just a normal asp.net core application nothing special need to be done, just deal with session as usual 
+            //
             var sessionValue = "TestSession";
             var sessionstartTime = HttpContext.Session.GetString("storedSessionStartTime");
 
