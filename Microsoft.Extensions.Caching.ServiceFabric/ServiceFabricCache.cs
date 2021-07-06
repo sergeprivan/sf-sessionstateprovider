@@ -84,6 +84,7 @@ namespace Microsoft.Extensions.Caching.ServiceFabric
             var epoctime = GetEpochExpiry(options, out expiryType);
             sessionItem.Epoctime = epoctime;
             sessionItem.ExpiryType = expiryType.ToString();
+            sessionItem.Ttl = DateTimeOffset.Now.ToUniversalTime().ToUnixTimeSeconds() + (_sessionMinutes * 60);
 
             await SessionService.AddSessionItem(key, sessionItem);
         }

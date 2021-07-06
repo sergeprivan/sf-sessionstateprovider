@@ -80,12 +80,11 @@ namespace Microsoft.Extensions.Caching.ServiceFabric.UserSession
         protected override async Task RunAsync(CancellationToken cancellationToken)
         {
             // We are going to loop to remove old session data            
-
-            var sessionKeyItems = await StateManager.GetOrAddAsync<IReliableDictionary<UserSessionItemId, UserSessionItem>>(SessionKeyDictionaryName);
-
             while (true)
             {
                 cancellationToken.ThrowIfCancellationRequested();
+
+                var sessionKeyItems = await StateManager.GetOrAddAsync<IReliableDictionary<UserSessionItemId, UserSessionItem>>(SessionKeyDictionaryName);
 
                 using (var tx = this.StateManager.CreateTransaction())
                 {
