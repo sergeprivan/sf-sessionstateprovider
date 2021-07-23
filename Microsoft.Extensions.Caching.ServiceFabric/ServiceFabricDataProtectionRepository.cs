@@ -9,7 +9,6 @@ using System.Fabric.Query;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Xml.Linq;
-using Microsoft.Extensions.Caching.ServiceFabric;
 using Microsoft.Extensions.Caching.ServiceFabric.SessionKeys.Interfaces;
 
 namespace Microsoft.Extensions.Caching.ServiceFabric

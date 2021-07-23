@@ -1,12 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ApplicationManifest xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ApplicationTypeName="Microsoft.Extensions.Caching.ServiceFabric.ApplicationType" ApplicationTypeVersion="1.0.0" xmlns="http://schemas.microsoft.com/2011/01/fabric">
   <Parameters>
-    <Parameter Name="SFContacts.SessionKeys_MinReplicaSetSize" DefaultValue="3" />
-    <Parameter Name="SFContacts.SessionKeys_PartitionCount" DefaultValue="1" />
-    <Parameter Name="SFContacts.SessionKeys_TargetReplicaSetSize" DefaultValue="3" />
+    <Parameter Name="SessionKeysService_MinReplicaSetSize" DefaultValue="3" />
+    <Parameter Name="SessionKeysService_PartitionCount" DefaultValue="1" />
+    <Parameter Name="SessionKeysService_TargetReplicaSetSize" DefaultValue="3" />
     <Parameter Name="Web1_ASPNETCORE_ENVIRONMENT" DefaultValue="" />
-    <Parameter Name="Web1_InstanceCount" DefaultValue="-1" />
-    <Parameter Name="SFContacts.UI_InstanceCount" DefaultValue="-1" />
+    <Parameter Name="Test_InstanceCount" DefaultValue="-1" />
     <Parameter Name="UserSessionService_PartitionCount" DefaultValue="10" />
     <Parameter Name="UserSessionService_MinReplicaSetSize" DefaultValue="3" />
     <Parameter Name="UserSessionService_TargetReplicaSetSize" DefaultValue="3" />
@@ -36,12 +35,12 @@
          
          The attribute ServiceTypeName below must match the name defined in the imported ServiceManifest.xml file. -->
     <Service Name="Microsoft.Extensions.Caching.ServiceFabric.SessionKeys">
-      <StatefulService ServiceTypeName="Microsoft.Extensions.Caching.ServiceFabric.SessionKeysType" TargetReplicaSetSize="[SFContacts.SessionKeys_TargetReplicaSetSize]" MinReplicaSetSize="[SFContacts.SessionKeys_MinReplicaSetSize]">
-        <UniformInt64Partition PartitionCount="[SFContacts.SessionKeys_PartitionCount]" LowKey="-9223372036854775808" HighKey="9223372036854775807" />
+      <StatefulService ServiceTypeName="Microsoft.Extensions.Caching.ServiceFabric.SessionKeysType" TargetReplicaSetSize="[SessionKeysService_TargetReplicaSetSize]" MinReplicaSetSize="[SessionKeysService_MinReplicaSetSize]">
+        <UniformInt64Partition PartitionCount="[SessionKeysService_PartitionCount]" LowKey="-9223372036854775808" HighKey="9223372036854775807" />
       </StatefulService>
     </Service>
     <Service Name="Microsoft.Extensions.Caching.ServiceFabric.Test" ServicePackageActivationMode="ExclusiveProcess">
-      <StatelessService ServiceTypeName="Microsoft.Extensions.Caching.ServiceFabric.TestType" InstanceCount="[Web1_InstanceCount]">
+      <StatelessService ServiceTypeName="Microsoft.Extensions.Caching.ServiceFabric.TestType" InstanceCount="[Test_InstanceCount]">
         <SingletonPartition />
       </StatelessService>
     </Service>
