@@ -16,7 +16,6 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.ServiceFabric.AspNetCore.Kestrel" Version="5.2.1571" />
     <PackageReference Include="Microsoft.ServiceFabric.Services" Version="5.2.1571" />
-    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
   </ItemGroup>
 
   <ItemGroup>
